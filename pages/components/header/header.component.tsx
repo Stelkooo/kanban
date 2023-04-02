@@ -16,7 +16,9 @@ export default function Header() {
           <Image src={Logo} alt="Kanban Logo" />
         </div>
         <Button btnStyle="clear">
-          <h1 className="whitespace-nowrap">Platform Launch</h1>
+          <h1 className="heading-large whitespace-nowrap text-black">
+            Platform Launch
+          </h1>
           <Image src={ChevronDown} alt="" className="" />
         </Button>
       </div>

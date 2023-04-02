@@ -13,6 +13,10 @@ module.exports = {
       height: {
         1.5625: '1.5625/* 25px */',
       },
+      gridAutoRows: {
+        8: 'repeat(8, minmax(0, 1fr))',
+        layout: 'min-content 1fr',
+      },
     },
     colors: {
       black: '#000112',
