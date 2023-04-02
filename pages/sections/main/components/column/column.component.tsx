@@ -14,7 +14,7 @@ export default function Column({ column }: Props) {
       <h2 className="heading-small mb-6 flex uppercase text-medium-grey before:mr-3 before:inline-block before:h-4 before:w-4 before:rounded-full before:bg-purple">
         {column.name} ({column.tasks.length})
       </h2>
-      <Tasks tasks={column.tasks} />
+      <Tasks tasks={tasksSorted} />
     </div>
   );
 }
