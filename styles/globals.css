@@ -24,4 +24,14 @@
     line-height: 15px;
     letter-spacing: 2.4px;
   }
+  .body-large {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 23px;
+  }
+  .body-medium {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

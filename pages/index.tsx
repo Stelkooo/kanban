@@ -2,6 +2,8 @@ import Head from 'next/head';
 
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
+import data from '@/public/data/data.json';
+
 import Header from './components/header/header.component';
 import Main from './sections/main/main.component';
 
@@ -16,7 +18,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        className={`${plusJakartaSans.className} grid h-screen grid-rows-[min-content_1fr]`}
+        className={`${plusJakartaSans.className} grid h-screen grid-rows-[min-content_1fr] overflow-hidden`}
       >
         <Header />
         <Main />
