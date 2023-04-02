@@ -2,8 +2,6 @@ import Head from 'next/head';
 
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
-import data from '@/public/data/data.json';
-
 import Header from './components/header/header.component';
 import Main from './sections/main/main.component';
 

@@ -1,17 +1,20 @@
-import Task from '../task/task.component';
+import { TColumn } from '@/pages/types/kanban.types';
 
-export default function Columns() {
+import Tasks from '../tasks/tasks.component';
+import { sortByOrder } from '../../utilities';
+
+type Props = {
+  column: TColumn;
+};
+
+export default function Column({ column }: Props) {
+  const tasksSorted = sortByOrder(column.tasks, column.order, 'id');
   return (
     <div className="min-w-[280px]">
       <h2 className="heading-small mb-6 flex uppercase text-medium-grey before:mr-3 before:inline-block before:h-4 before:w-4 before:rounded-full before:bg-purple">
-        Todo (4)
+        {column.name} ({column.tasks.length})
       </h2>
-      <div className="grid gap-y-5">
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-      </div>
+      <Tasks tasks={column.tasks} />
     </div>
   );
 }

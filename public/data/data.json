@@ -1,5 +1,4 @@
 {
-  "order": [1, 2, 3],
   "boards": [
     {
       "id": 1,
@@ -398,11 +397,13 @@
           ]
         },
         {
+          "order": [],
           "id": 2,
           "name": "Doing",
           "tasks": []
         },
         {
+          "order": [],
           "id": 3,
           "name": "Done",
           "tasks": []
@@ -458,11 +459,13 @@
           ]
         },
         {
+          "order": [],
           "id": 2,
           "name": "Next",
           "tasks": []
         },
         {
+          "order": [],
           "id": 3,
           "name": "Later",
           "tasks": []

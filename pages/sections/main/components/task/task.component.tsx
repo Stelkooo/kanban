@@ -1,8 +1,17 @@
-export default function Task() {
+import { TTask } from '@/pages/types/kanban.types';
+
+type Props = {
+  task: TTask;
+};
+
+export default function Task({ task }: Props) {
   return (
     <div className="rounded-lg bg-white px-4 py-6">
-      <h3 className="heading-medium mb-2">Build UI for onboarding flow</h3>
-      <p className="body-medium text-medium-grey">0 of 3 substasks</p>
+      <h3 className="heading-medium mb-2">{task.title}</h3>
+      <p className="body-medium text-medium-grey">
+        {task.subtasks.filter((subtask) => subtask.isCompleted === true).length}{' '}
+        of {task.subtasks.length} subtasks
+      </p>
     </div>
   );
 }
