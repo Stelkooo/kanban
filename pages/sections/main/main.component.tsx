@@ -8,6 +8,7 @@ import data from '@/public/data/data.json';
 
 import Button from '@/pages/components/button/button.component';
 import Columns from './components/columns/columns.component';
+import Sidebar from '../sidebar/sidebar.component';
 
 import { sortByOrder } from './utilities';
 
@@ -24,7 +25,7 @@ export default function Main() {
   }, []);
 
   return (
-    <main className="flex gap-6 overflow-auto bg-light-grey px-4 py-6">
+    <main className="relative flex gap-6 overflow-auto bg-light-grey px-4 py-6">
       {_.isEmpty(board) ? (
         <div className="absolute top-1/2 -translate-y-1/2 px-4 text-center">
           <h2 className="heading-large mb-6 text-medium-grey">
@@ -37,6 +38,7 @@ export default function Main() {
       ) : (
         <Columns columns={columns} />
       )}
+      {/* <Sidebar boards={data.boards} currentBoard={board} /> */}
     </main>
   );
 }

@@ -23,6 +23,8 @@
     font-size: 12px;
     line-height: 15px;
     letter-spacing: 2.4px;
+    color: #828FA3;
+    text-transform: uppercase;
   }
   .body-large {
     font-weight: 500;

@@ -8,7 +8,10 @@ module.exports = {
   theme: {
     extend: {
       padding: {
-        4.5: '1.125rem/* 16px */',
+        4.5: '1.125rem/* 18px */',
+      },
+      margin: {
+        4.125: '1.125rem/* 18px */',
       },
       height: {
         1.5625: '1.5625/* 25px */',
