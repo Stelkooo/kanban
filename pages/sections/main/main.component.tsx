@@ -6,15 +6,16 @@ import _ from 'lodash';
 
 import data from '@/public/data/data.json';
 
+import { TColumn } from '@/pages/types/kanban.types';
+
 import Button from '@/pages/components/button/button.component';
 import Columns from './components/columns/columns.component';
-import Sidebar from '../sidebar/sidebar.component';
 
 import { sortByOrder } from './utilities';
 
 export default function Main() {
   const [board, setBoard] = useState({});
-  const [columns, setColumns] = useState<any>();
+  const [columns, setColumns] = useState<TColumn[]>();
 
   useEffect(() => {
     const boardInitData = data.boards.find((item) => item.id === 1);

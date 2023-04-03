@@ -21,6 +21,7 @@ export type TTask = {
 };
 
 export type TSubtask = {
+  id: string;
   title: string;
   isCompleted: boolean;
 };
