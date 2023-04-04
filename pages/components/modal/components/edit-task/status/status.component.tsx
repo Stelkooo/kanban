@@ -1,7 +1,7 @@
 'use client';
 
 import Select, { StylesConfig } from 'react-select';
-import { TColumn, TTask } from '@/pages/types/kanban.types';
+import { TColumn, TTask } from '@/types/kanban.types';
 
 type OptionType = { value: number; label: string };
 type OptionsType = Array<OptionType>;

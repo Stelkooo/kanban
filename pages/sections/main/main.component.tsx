@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import _ from 'lodash';
 
-import { TBoard, TColumn } from '@/pages/types/kanban.types';
+import { TBoard, TColumn } from '@/types/kanban.types';
 
 import Button from '@/pages/components/button/button.component';
 import Columns from './components/columns/columns.component';

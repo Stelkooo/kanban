@@ -1,4 +1,4 @@
-import { TBoard } from '@/pages/types/kanban.types';
+import { TBoard } from '@/types/kanban.types';
 
 type Props = {
   boards: TBoard[];

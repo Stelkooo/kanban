@@ -1,4 +1,4 @@
-import { TTask } from '@/pages/types/kanban.types';
+import { TTask } from '@/types/kanban.types';
 import Modal from '../../modal.component';
 import Subtasks from './subtasks/subtasks.component';
 

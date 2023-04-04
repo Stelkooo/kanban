@@ -1,4 +1,4 @@
-import { TTask } from '@/pages/types/kanban.types';
+import { TTask } from '@/types/kanban.types';
 import Task from '../task/task.component';
 
 type Props = {

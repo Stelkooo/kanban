@@ -1,4 +1,4 @@
-import { TColumn } from '@/pages/types/kanban.types';
+import { TColumn } from '@/types/kanban.types';
 
 import Tasks from '../tasks/tasks.component';
 import { sortByOrder } from '../../utilities';

@@ -1,4 +1,4 @@
-import { TColumn, TTask } from '@/pages/types/kanban.types';
+import { TColumn, TTask } from '@/types/kanban.types';
 
 import Button from '@/pages/components/button/button.component';
 import Modal from '../../modal.component';
