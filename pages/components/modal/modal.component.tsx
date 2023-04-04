@@ -8,6 +8,7 @@ import {
 } from '@/store/modal/modal.selector';
 import ViewTask from './components/view-task/view-task.component';
 import AddTask from './components/add-task/add-task.component';
+import EditTask from './components/edit-task/edit-task.component';
 
 export default function Modal() {
   const modalType = useAppSelector(selectModalType);
@@ -16,5 +17,6 @@ export default function Modal() {
 
   if (modalType === 'view-task' && task) return <ViewTask task={task} />;
   if (modalType === 'add-task') return <AddTask />;
+  if (modalType === 'edit-task' && task) return <EditTask task={task} />;
   return <h1>Modal</h1>;
 }

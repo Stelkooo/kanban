@@ -1,4 +1,4 @@
-import { TColumn, TTask } from '@/types/kanban.types';
+import { TTask } from '@/types/kanban.types';
 
 import Button from '@/pages/components/button/button.component';
 import ModalTemplate from '../modal-template/modal-template.component';
@@ -7,10 +7,9 @@ import Status from './status/status.component';
 
 type Props = {
   task: TTask;
-  columns: TColumn[];
 };
 
-export default function EditTask({ task, columns }: Props) {
+export default function EditTask({ task }: Props) {
   return (
     <ModalTemplate>
       <h3 className="heading-large">Edit Task</h3>
@@ -33,11 +32,11 @@ export default function EditTask({ task, columns }: Props) {
           placeholder="e.g. It’s always good to take a break. This 
           15 minute break will  recharge the batteries 
           a little."
-          defaultValue={task.description}
+          defaultValue={task.description || ''}
         />
       </label>
       <Subtasks subtasks={task.subtasks} />
-      <Status columns={columns} task={task} />
+      <Status task={task} />
       <Button btnStyle="primarySmall">
         <p className="body-medium">Save Changes</p>
       </Button>

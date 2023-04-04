@@ -3,6 +3,9 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
+import { useAppDispatch } from '@/store/hooks';
+import { setModalType } from '@/store/modal/modal.reducer';
+
 import { TBoard, TTask } from '@/types/kanban.types';
 
 import VertEllipsis from '@/public/assets/icon-vertical-ellipsis.svg';
@@ -11,15 +14,23 @@ import Button from '../button/button.component';
 
 type Props = {
   optionsAbout: 'task' | 'board';
-  task?: TTask;
   board?: TBoard;
 };
 
-export default function MoreOptions({ optionsAbout, task, board }: Props) {
+export default function MoreOptions({ optionsAbout, board }: Props) {
+  const dispatch = useAppDispatch();
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const popupToggleHandler = () => {
     setIsPopupOpen(!isPopupOpen);
+  };
+
+  const editHandler = () => {
+    if (optionsAbout === 'task') {
+      setIsPopupOpen(!isPopupOpen);
+      dispatch(setModalType('edit-task'));
+    }
   };
   return (
     <div className="relative grid place-content-center">
@@ -32,7 +43,11 @@ export default function MoreOptions({ optionsAbout, task, board }: Props) {
       </Button>
       {isPopupOpen && (
         <div className="absolute right-0 top-12 z-50 rounded-lg bg-white p-4 drop-shadow-md">
-          <button type="button" className="mb-4 h-6 w-40 text-left">
+          <button
+            type="button"
+            className="mb-4 h-6 w-40 text-left"
+            onClick={() => editHandler()}
+          >
             <p className="body-large capitalize text-medium-grey">
               Edit {optionsAbout}
             </p>
@@ -49,6 +64,5 @@ export default function MoreOptions({ optionsAbout, task, board }: Props) {
 }
 
 MoreOptions.defaultProps = {
-  task: null,
   board: null,
 };
