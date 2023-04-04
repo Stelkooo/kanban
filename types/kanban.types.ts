@@ -13,7 +13,7 @@ export type TColumn = {
 };
 
 export type TTask = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   status: string;
@@ -21,7 +21,7 @@ export type TTask = {
 };
 
 export type TSubtask = {
-  id: string;
+  id: number;
   title: string;
   isCompleted: boolean;
 };

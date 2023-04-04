@@ -1,11 +1,15 @@
 'use client';
 
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { fetchBoards } from '@/store/kanban/kanban.reducer';
+import {
+  selectBoards,
+  selectCurrentBoard,
+} from '@/store/kanban/kanban.selector';
 
 import { Plus_Jakarta_Sans } from 'next/font/google';
-
-import data from '@/public/data/data.json';
 
 import Header from './components/header/header.component';
 import Main from './sections/main/main.component';
@@ -14,14 +18,13 @@ import Sidebar from './sections/sidebar/sidebar.component';
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
 export default function Home() {
-  const [board, setBoard] = useState({});
+  const dispatch = useAppDispatch();
+  const boards = useAppSelector(selectBoards);
+  const currentBoard = useAppSelector(selectCurrentBoard);
 
   useEffect(() => {
-    const boardInitData = data.boards.find((item) => item.id === 1);
-    if (boardInitData) {
-      setBoard(boardInitData);
-    }
-  }, []);
+    dispatch(fetchBoards());
+  }, [dispatch]);
   return (
     <>
       <Head>
@@ -32,9 +35,9 @@ export default function Home() {
       <div
         className={`${plusJakartaSans.className} grid h-screen grid-cols-[min-content_1fr] grid-rows-[min-content_1fr] overflow-hidden`}
       >
-        <Sidebar boards={data.boards} currentBoard={board} />
+        <Sidebar boards={boards} currentBoard={currentBoard} />
         <Header />
-        <Main board={board} />
+        <Main board={currentBoard} />
       </div>
     </>
   );
