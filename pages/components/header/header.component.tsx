@@ -1,11 +1,6 @@
-import Image from 'next/image';
-
-import AddTask from '@/public/assets/icon-add-task-mobile.svg';
-import VertEllipsis from '@/public/assets/icon-vertical-ellipsis.svg';
-
-import Button from '../button/button.component';
 import CurrentBoard from './components/current-board/current-board.component';
 import AddTaskBtn from './components/add-task-btn/add-task-btn.component';
+import MoreOptions from '../more-options/more-options.component';
 
 export default function Header() {
   return (
@@ -13,9 +8,7 @@ export default function Header() {
       <CurrentBoard />
       <div className="flex gap-4">
         <AddTaskBtn />
-        <button type="button">
-          <Image src={VertEllipsis} alt="Click here for more board options" />
-        </button>
+        <MoreOptions optionsAbout="board" />
       </div>
     </header>
   );
