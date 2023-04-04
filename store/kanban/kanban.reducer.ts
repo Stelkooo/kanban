@@ -37,6 +37,9 @@ export const kanbanSlice = createSlice({
         currentBoardId: state.boards[0].id,
       };
     },
+    createBoard: (state, action: PayloadAction<TBoard>) => {
+      state.boards.splice(-1, 0, action.payload);
+    },
     removeBoard: (state, action: PayloadAction<TBoard>) => {
       state.boards.splice(
         state.boards.findIndex((board) => board.id === action.payload.id),
@@ -71,6 +74,7 @@ export const kanbanSlice = createSlice({
 export const {
   setCurrentBoardId,
   setFirstBoardAsCurrent,
+  createBoard,
   removeBoard,
   removeTask,
 } = kanbanSlice.actions;
