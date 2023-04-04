@@ -10,7 +10,7 @@ export default function Boards({ boards, currentBoard }: Props) {
   //   setBoard(data.boards.find((item) => item.id === boardId));
   // };
   return (
-    <div className="mr-6 flex flex-col">
+    <div className="mr-6 flex flex-col md:mr-0">
       {boards.map((board) =>
         board.id === currentBoard.id ? (
           <button
