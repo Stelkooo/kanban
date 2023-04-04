@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { useAppDispatch } from '@/store/hooks';
-import { setModalType } from '@/store/modal/modal.reducer';
+import { setModalToggle, setModalType } from '@/store/modal/modal.reducer';
 
 import { TBoard, TTask } from '@/types/kanban.types';
 
@@ -30,6 +30,11 @@ export default function MoreOptions({ optionsAbout, board }: Props) {
     if (optionsAbout === 'task') {
       setIsPopupOpen(!isPopupOpen);
       dispatch(setModalType('edit-task'));
+    }
+    if (optionsAbout === 'board') {
+      setIsPopupOpen(!isPopupOpen);
+      dispatch(setModalType('edit-board'));
+      dispatch(setModalToggle());
     }
   };
   return (

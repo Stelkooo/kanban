@@ -1,13 +1,8 @@
-import { TBoard } from '@/types/kanban.types';
 import Button from '@/pages/components/button/button.component';
 import ModalTemplate from '../modal-template/modal-template.component';
 import Columns from './columns/columns.component';
 
-type Props = {
-  board: TBoard;
-};
-
-export default function AddBoard({ board }: Props) {
+export default function AddBoard() {
   return (
     <ModalTemplate>
       <h3 className="heading-large">Add New Board</h3>
@@ -22,7 +17,7 @@ export default function AddBoard({ board }: Props) {
       </label>
       <Columns />
       <Button btnStyle="primarySmall">
-        <p className="body-medium">Create New Board</p>
+        <p className="body-medium">Create Board</p>
       </Button>
     </ModalTemplate>
   );

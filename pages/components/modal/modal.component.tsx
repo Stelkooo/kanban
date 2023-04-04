@@ -9,6 +9,8 @@ import {
 import ViewTask from './components/view-task/view-task.component';
 import AddTask from './components/add-task/add-task.component';
 import EditTask from './components/edit-task/edit-task.component';
+import ModalTemplate from './components/modal-template/modal-template.component';
+import AddBoard from './components/add-board/add-board.component';
 
 export default function Modal() {
   const modalType = useAppSelector(selectModalType);
@@ -18,5 +20,11 @@ export default function Modal() {
   if (modalType === 'view-task' && task) return <ViewTask task={task} />;
   if (modalType === 'add-task') return <AddTask />;
   if (modalType === 'edit-task' && task) return <EditTask task={task} />;
-  return <h1>Modal</h1>;
+  if (modalType === 'add-board') return <AddBoard />;
+  return (
+    <ModalTemplate>
+      <p>Modal does not exist :/</p>
+      <p>How did you manage this then?</p>
+    </ModalTemplate>
+  );
 }

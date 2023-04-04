@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCurrentBoardId } from '@/store/kanban/kanban.reducer';
+import { setModalToggle, setModalType } from '@/store/modal/modal.reducer';
 import {
   selectBoards,
   selectCurrentBoard,
@@ -22,8 +23,15 @@ export default function Boards({ setIsMenuOpen }: Props) {
     if (boardId === currentBoard?.id) {
       setIsMenuOpen(false);
     } else {
+      setIsMenuOpen(false);
       dispatch(setCurrentBoardId(boardId));
     }
+  };
+
+  const newBoardHandler = () => {
+    setIsMenuOpen(false);
+    dispatch(setModalType('add-board'));
+    dispatch(setModalToggle());
   };
   return (
     <div className="mr-6 flex flex-col md:mr-0">
@@ -70,6 +78,7 @@ export default function Boards({ setIsMenuOpen }: Props) {
       <button
         type="button"
         className="flex cursor-pointer items-center gap-3 py-[15px] pl-6"
+        onClick={() => newBoardHandler()}
       >
         <svg
           width="16"
