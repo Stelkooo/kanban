@@ -15,7 +15,7 @@ export type TColumn = {
 export type TTask = {
   id: number;
   title: string;
-  description: string;
+  description: string | null;
   status: string;
   subtasks: TSubtask[];
 };

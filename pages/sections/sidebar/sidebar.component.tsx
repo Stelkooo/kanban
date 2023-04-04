@@ -7,7 +7,7 @@ import HideSidebar from '@/public/assets/icon-hide-sidebar.svg';
 
 import { TBoard } from '@/types/kanban.types';
 
-import Boards from './components/boards.component';
+import Boards from '@/pages/components/modal/components/select-board/boards/boards.component';
 
 type Props = {
   boards: TBoard[];

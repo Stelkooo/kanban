@@ -1,5 +1,5 @@
 import { TTask } from '@/types/kanban.types';
-import Modal from '../../modal.component';
+import ModalTemplate from '../modal-template/modal-template.component';
 import Subtasks from './subtasks/subtasks.component';
 
 type Props = {
@@ -8,10 +8,10 @@ type Props = {
 
 export default function ViewTask({ task }: Props) {
   return (
-    <Modal>
+    <ModalTemplate>
       <h3 className="heading-large">{task.title}</h3>
-      {task.description ? <p>{task.description}</p> : null}
+      <p>{task.description}</p>
       <Subtasks subtasks={task.subtasks} />
-    </Modal>
+    </ModalTemplate>
   );
 }

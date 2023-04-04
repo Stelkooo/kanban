@@ -11,8 +11,7 @@ export const selectBoards = createSelector(
 
 export const selectCurrentBoard = createSelector(
   [selectKanbanReducer],
-  (kanban) =>
-    kanban.boards.find((board) => board.id === kanban.currentBoardId) as TBoard
+  (kanban) => kanban.boards.find((board) => board.id === kanban.currentBoardId)
 );
 
 export const selectCurrentColumns = createSelector(

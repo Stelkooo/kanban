@@ -1,13 +1,13 @@
 import { TTask } from '@/types/kanban.types';
 
 import Button from '@/pages/components/button/button.component';
-import Modal from '../../modal.component';
+import ModalTemplate from '../modal-template/modal-template.component';
 
 type Props = { task: TTask };
 
 export default function DeleteTask({ task }: Props) {
   return (
-    <Modal>
+    <ModalTemplate>
       <h3 className="heading-large text-red">Delete this task?</h3>
       <p className="body-large text-medium-grey">
         Are you sure you want to delete the ‘{task.title}’ task and its
@@ -21,6 +21,6 @@ export default function DeleteTask({ task }: Props) {
           <p className="body-medium">Cancel</p>
         </Button>
       </div>
-    </Modal>
+    </ModalTemplate>
   );
 }

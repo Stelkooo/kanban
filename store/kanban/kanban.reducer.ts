@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { TBoard } from '@/types/kanban.types';
 
@@ -24,7 +24,14 @@ const KANBAN_INITIAL_VALUE: TInitialState = {
 export const kanbanSlice = createSlice({
   name: 'kanban',
   initialState: KANBAN_INITIAL_VALUE,
-  reducers: {},
+  reducers: {
+    setCurrentBoardId: (state, action: PayloadAction<number>) => {
+      return {
+        ...state,
+        currentBoardId: action.payload,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchBoards.fulfilled, (state, action) => {
       return {
@@ -36,6 +43,6 @@ export const kanbanSlice = createSlice({
   },
 });
 
-// export const {} = kanbanSlice.actions;
+export const { setCurrentBoardId } = kanbanSlice.actions;
 
 export const kanbanReducer = kanbanSlice.reducer;

@@ -1,14 +1,18 @@
-type Props = {
-  children: JSX.Element[];
-};
+'use client';
 
-export default function Modal({ children }: Props) {
-  return (
-    <>
-      <div className="fixed inset-0 z-40 h-full w-full bg-black opacity-60" />
-      <div className="fixed left-1/2 top-1/2 z-50 flex w-[343px] -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-md bg-white p-6">
-        {children}
-      </div>
-    </>
-  );
+import { useAppSelector } from '@/store/hooks';
+import {
+  selectModalType,
+  selectTask,
+  selectBoard,
+} from '@/store/modal/modal.selector';
+import ViewTask from './components/view-task/view-task.component';
+
+export default function Modal() {
+  const modalType = useAppSelector(selectModalType);
+  const task = useAppSelector(selectTask);
+  const board = useAppSelector(selectBoard);
+
+  if (modalType === 'view-task' && task) return <ViewTask task={task} />;
+  return <h1>Modal</h1>;
 }
