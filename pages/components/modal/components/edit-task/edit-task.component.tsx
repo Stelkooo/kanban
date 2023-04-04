@@ -1,4 +1,4 @@
-import { TColumn } from '@/pages/types/kanban.types';
+import { TColumn, TTask } from '@/pages/types/kanban.types';
 
 import Button from '@/pages/components/button/button.component';
 import Modal from '../../modal.component';
@@ -6,13 +6,14 @@ import Subtasks from './subtasks/subtasks.component';
 import Status from './status/status.component';
 
 type Props = {
+  task: TTask;
   columns: TColumn[];
 };
 
-export default function AddTask({ columns }: Props) {
+export default function EditTask({ task, columns }: Props) {
   return (
     <Modal>
-      <h3 className="heading-large">Add New Task</h3>
+      <h3 className="heading-large">Edit Task</h3>
       <label htmlFor="title" className="grid gap-y-2">
         <p className="body-medium text-medium-grey">Title</p>
         <input
@@ -20,6 +21,7 @@ export default function AddTask({ columns }: Props) {
           id="title"
           className="body-large rounded-[4px] border border-lines-light px-4 py-2"
           placeholder="e.g. Take coffee break"
+          defaultValue={task.title}
         />
       </label>
       <label htmlFor="description" className="grid gap-y-2">
@@ -31,12 +33,13 @@ export default function AddTask({ columns }: Props) {
           placeholder="e.g. It’s always good to take a break. This 
           15 minute break will  recharge the batteries 
           a little."
+          defaultValue={task.description}
         />
       </label>
-      <Subtasks />
-      <Status columns={columns} />
+      <Subtasks subtasks={task.subtasks} />
+      <Status columns={columns} task={task} />
       <Button btnStyle="primarySmall">
-        <p className="body-medium">Create Task</p>
+        <p className="body-medium">Save Changes</p>
       </Button>
     </Modal>
   );

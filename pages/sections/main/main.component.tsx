@@ -12,7 +12,6 @@ import Button from '@/pages/components/button/button.component';
 import Columns from './components/columns/columns.component';
 
 import { sortByOrder } from './utilities';
-import AddTask from '@/pages/components/modal/components/add-task/add-task.component';
 
 export default function Main() {
   const [board, setBoard] = useState({});
@@ -38,10 +37,7 @@ export default function Main() {
           </Button>
         </div>
       ) : (
-        <>
-          <Columns columns={columns} />
-          <AddTask columns={columns} />
-        </>
+        <Columns columns={columns} />
       )}
       {/* <Sidebar boards={data.boards} currentBoard={board} /> */}
     </main>
