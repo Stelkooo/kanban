@@ -14,6 +14,7 @@ export type TColumn = {
 
 export type TTask = {
   id: number;
+  columnId: number;
   title: string;
   description: string | null;
   status: string;

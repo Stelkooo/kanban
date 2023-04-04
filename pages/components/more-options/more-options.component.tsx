@@ -6,18 +6,15 @@ import { useState } from 'react';
 import { useAppDispatch } from '@/store/hooks';
 import { setModalToggle, setModalType } from '@/store/modal/modal.reducer';
 
-import { TBoard, TTask } from '@/types/kanban.types';
-
 import VertEllipsis from '@/public/assets/icon-vertical-ellipsis.svg';
 
 import Button from '../button/button.component';
 
 type Props = {
   optionsAbout: 'task' | 'board';
-  board?: TBoard;
 };
 
-export default function MoreOptions({ optionsAbout, board }: Props) {
+export default function MoreOptions({ optionsAbout }: Props) {
   const dispatch = useAppDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -34,6 +31,17 @@ export default function MoreOptions({ optionsAbout, board }: Props) {
     if (optionsAbout === 'board') {
       setIsPopupOpen(!isPopupOpen);
       dispatch(setModalType('edit-board'));
+      dispatch(setModalToggle());
+    }
+  };
+  const deleteHandler = () => {
+    if (optionsAbout === 'task') {
+      setIsPopupOpen(!isPopupOpen);
+      dispatch(setModalType('delete-task'));
+    }
+    if (optionsAbout === 'board') {
+      setIsPopupOpen(!isPopupOpen);
+      dispatch(setModalType('delete-board'));
       dispatch(setModalToggle());
     }
   };
@@ -57,7 +65,11 @@ export default function MoreOptions({ optionsAbout, board }: Props) {
               Edit {optionsAbout}
             </p>
           </button>
-          <button type="button" className="h-6 w-40 text-left">
+          <button
+            type="button"
+            className="h-6 w-40 text-left"
+            onClick={() => deleteHandler()}
+          >
             <p className="body-large capitalize text-red">
               Delete {optionsAbout}
             </p>
@@ -67,7 +79,3 @@ export default function MoreOptions({ optionsAbout, board }: Props) {
     </div>
   );
 }
-
-MoreOptions.defaultProps = {
-  board: null,
-};

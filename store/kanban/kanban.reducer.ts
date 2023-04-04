@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { TBoard } from '@/types/kanban.types';
+import { TBoard, TTask } from '@/types/kanban.types';
 
 export const fetchBoards = createAsyncThunk('kanban/fetch', async () => {
   const data = await fetch('data/data.json', {
@@ -31,6 +31,31 @@ export const kanbanSlice = createSlice({
         currentBoardId: action.payload,
       };
     },
+    setFirstBoardAsCurrent: (state) => {
+      return {
+        ...state,
+        currentBoardId: state.boards[0].id,
+      };
+    },
+    removeBoard: (state, action: PayloadAction<TBoard>) => {
+      state.boards.splice(
+        state.boards.findIndex((board) => board.id === action.payload.id),
+        1
+      );
+    },
+    removeTask: (state, action: PayloadAction<TTask>) => {
+      const board = state.boards.find((el) => el.id === state.currentBoardId);
+      if (board) {
+        const column = board.columns.find(
+          (el) => el.id === action.payload.columnId
+        );
+        if (column) {
+          column.order.splice(column.order.indexOf(action.payload.id), 1);
+          const task = column.tasks.find((el) => el.id === action.payload.id);
+          if (task) column.tasks.splice(column.tasks.indexOf(task), 1);
+        }
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBoards.fulfilled, (state, action) => {
@@ -43,6 +68,11 @@ export const kanbanSlice = createSlice({
   },
 });
 
-export const { setCurrentBoardId } = kanbanSlice.actions;
+export const {
+  setCurrentBoardId,
+  setFirstBoardAsCurrent,
+  removeBoard,
+  removeTask,
+} = kanbanSlice.actions;
 
 export const kanbanReducer = kanbanSlice.reducer;
