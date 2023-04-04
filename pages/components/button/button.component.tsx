@@ -10,6 +10,7 @@ type Props = {
     | 'disabledDark';
   isDisabled?: boolean;
   isSubmit?: boolean;
+  onClickFunc?: <T>(value?: T) => void;
 };
 
 export default function Button({
@@ -17,6 +18,7 @@ export default function Button({
   btnStyle,
   isDisabled,
   isSubmit,
+  onClickFunc,
 }: Props) {
   // base button style
   const classNames: string[] = [
@@ -42,14 +44,16 @@ export default function Button({
       'disabled:opacity-25',
       'hover:bg-purple-hover'
     );
-  if (btnStyle === 'secondary') classNames.push('bg-white', 'text-purple');
+  if (btnStyle === 'secondary') classNames.push('bg-light-grey', 'text-purple');
   if (btnStyle === 'destructive')
     classNames.push('bg-red', 'text-white', 'hover:bg-red-hover');
+
   return (
     <button
       type={isSubmit ? 'submit' : 'button'}
       disabled={isDisabled}
       className={classNames.join(' ')}
+      onClick={onClickFunc}
     >
       {children}
     </button>
@@ -59,4 +63,5 @@ export default function Button({
 Button.defaultProps = {
   isDisabled: false,
   isSubmit: false,
+  onClickFunc: null,
 };

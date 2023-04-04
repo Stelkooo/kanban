@@ -7,8 +7,6 @@ type Props = {
 };
 
 export default function ViewTask({ task }: Props) {
-  console.log(task);
-
   return (
     <Modal>
       <h3 className="heading-large">{task.title}</h3>
