@@ -1,15 +1,9 @@
-import { TColumn } from '@/types/kanban.types';
-
 import Button from '@/pages/components/button/button.component';
 import ModalTemplate from '../modal-template/modal-template.component';
 import Subtasks from './subtasks/subtasks.component';
 import Status from './status/status.component';
 
-type Props = {
-  columns: TColumn[];
-};
-
-export default function AddTask({ columns }: Props) {
+export default function AddTask() {
   return (
     <ModalTemplate>
       <h3 className="heading-large">Add New Task</h3>
@@ -34,7 +28,7 @@ export default function AddTask({ columns }: Props) {
         />
       </label>
       <Subtasks />
-      <Status columns={columns} />
+      <Status />
       <Button btnStyle="primarySmall">
         <p className="body-medium">Create Task</p>
       </Button>

@@ -1,7 +1,9 @@
 'use client';
 
 import Select, { StylesConfig } from 'react-select';
-import { TColumn } from '@/types/kanban.types';
+
+import { useAppSelector } from '@/store/hooks';
+import { selectCurrentColumns } from '@/store/kanban/kanban.selector';
 
 type OptionType = { value: number; label: string };
 type OptionsType = Array<OptionType>;
@@ -42,11 +44,9 @@ const statusStyles: StylesConfig = {
   }),
 };
 
-type Props = {
-  columns: TColumn[];
-};
+export default function Status() {
+  const columns = useAppSelector(selectCurrentColumns);
 
-export default function Status({ columns }: Props) {
   const options: OptionsType = [];
   columns?.forEach((column) =>
     options.push({ value: column.id, label: column.name })
