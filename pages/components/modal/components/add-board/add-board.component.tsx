@@ -3,7 +3,8 @@
 import { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { createBoard } from '@/store/kanban/kanban.reducer';
+import { createBoard, setCurrentBoardId } from '@/store/kanban/kanban.reducer';
+import { setModalToggle } from '@/store/modal/modal.reducer';
 import { selectBoards } from '@/store/kanban/kanban.selector';
 
 import { TColumn } from '@/types/kanban.types';
@@ -20,7 +21,7 @@ export default function AddBoard() {
   const [columns, setColumns] = useState<TColumn[]>([]);
 
   const createBoardHandler = () => {
-    if (name)
+    if (name) {
       dispatch(
         createBoard({
           name,
@@ -29,6 +30,9 @@ export default function AddBoard() {
           order: columns.map((el) => el.id),
         })
       );
+      dispatch(setCurrentBoardId(boards[boards.length - 1].id + 1));
+      dispatch(setModalToggle());
+    }
   };
   return (
     <ModalTemplate>

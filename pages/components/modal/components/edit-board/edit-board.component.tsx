@@ -1,4 +1,12 @@
-import { TBoard } from '@/types/kanban.types';
+'use client';
+
+import { useState } from 'react';
+
+import { useAppDispatch } from '@/store/hooks';
+import { setBoardColumns, setBoardName } from '@/store/kanban/kanban.reducer';
+import { setModalToggle } from '@/store/modal/modal.reducer';
+
+import { TBoard, TColumn } from '@/types/kanban.types';
 
 import Button from '@/pages/components/button/button.component';
 import ModalTemplate from '../modal-template/modal-template.component';
@@ -7,6 +15,16 @@ import Columns from './columns/columns.component';
 type Props = { board: TBoard };
 
 export default function EditBoard({ board }: Props) {
+  const dispatch = useAppDispatch();
+
+  const [name, setName] = useState<string>(board.name);
+  const [columns, setColumns] = useState<TColumn[]>(board.columns);
+
+  const onClickHandler = () => {
+    if (name !== board.name) dispatch(setBoardName(name));
+    if (columns !== board.columns) dispatch(setBoardColumns(columns));
+    dispatch(setModalToggle());
+  };
   return (
     <ModalTemplate>
       <h3 className="heading-large">Edit Board</h3>
@@ -18,10 +36,11 @@ export default function EditBoard({ board }: Props) {
           className="body-large rounded-[4px] border border-lines-light px-4 py-2"
           placeholder="e.g. Take coffee break"
           defaultValue={board.name}
+          onChange={(e) => setName(e.currentTarget.value)}
         />
       </label>
-      <Columns columns={board.columns} />
-      <Button btnStyle="primarySmall">
+      <Columns columns={columns} setColumns={setColumns} />
+      <Button btnStyle="primarySmall" onClickFunc={() => onClickHandler()}>
         <p className="body-medium">Save Changes</p>
       </Button>
     </ModalTemplate>
