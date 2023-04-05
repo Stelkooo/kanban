@@ -63,6 +63,26 @@ export const kanbanSlice = createSlice({
     setCurrentTask: (state, action: PayloadAction<TTask>) => {
       return { ...state, currentTask: action.payload };
     },
+    createTask: (state, action) => {
+      const board = state.boards.find((el) => el.id === state.currentBoardId);
+      if (board) {
+        const column = board.columns.find(
+          (el) => el.id === action.payload.columnId
+        );
+        if (column) {
+          const task: TTask = {
+            title: action.payload.title,
+            description: action.payload.description,
+            columnId: action.payload.columnId,
+            subtasks: action.payload.subtasks,
+            status: '',
+            id: 123,
+          };
+          column.tasks.splice(-1, 0, task);
+          column.order.splice(-1, 0, 123);
+        }
+      }
+    },
     setTaskStatus: (state, action) => {
       const board = state.boards.find((el) => el.id === state.currentBoardId);
       if (board) {
@@ -141,6 +161,7 @@ export const {
   setBoardColumns,
   removeBoard,
   setCurrentTask,
+  createTask,
   setTaskStatus,
   removeTask,
   setSubtaskStatus,

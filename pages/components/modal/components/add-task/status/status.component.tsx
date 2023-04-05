@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, Dispatch, SetStateAction } from 'react';
+
 import Select, { StylesConfig } from 'react-select';
 
 import { useAppSelector } from '@/store/hooks';
@@ -44,13 +46,25 @@ const statusStyles: StylesConfig = {
   }),
 };
 
-export default function Status() {
+type Props = {
+  setStatus: Dispatch<SetStateAction<number>>;
+};
+
+export default function Status({ setStatus }: Props) {
   const columns = useAppSelector(selectCurrentColumns);
 
   const options: OptionsType = [];
   columns?.forEach((column) =>
     options.push({ value: column.id, label: column.name })
   );
+
+  const onChangeHandler = (e: OptionType) => {
+    setStatus(e.value);
+  };
+
+  useEffect(() => {
+    if (options) setStatus(options[0].value);
+  }, []);
   return (
     <div>
       <p className="body-medium mb-2 text-medium-grey">Status</p>
@@ -59,6 +73,7 @@ export default function Status() {
         defaultValue={options[0]}
         isSearchable={false}
         styles={statusStyles}
+        onChange={(e) => onChangeHandler(e as OptionType)}
       />
     </div>
   );
