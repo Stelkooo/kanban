@@ -1,7 +1,7 @@
 'use client';
 
 import { useAppSelector } from '@/store/hooks';
-import { selectModalType, selectTask } from '@/store/modal/modal.selector';
+import { selectModalType } from '@/store/modal/modal.selector';
 import { selectCurrentBoard } from '@/store/kanban/kanban.selector';
 
 import ViewTask from './components/view-task/view-task.component';
@@ -15,16 +15,15 @@ import DeleteTask from './components/delete-task/delete-task.component';
 
 export default function Modal() {
   const modalType = useAppSelector(selectModalType);
-  const task = useAppSelector(selectTask);
   const board = useAppSelector(selectCurrentBoard);
 
   switch (modalType) {
     case 'view-task':
-      return task && <ViewTask task={task} />;
+      return <ViewTask />;
     case 'add-task':
       return <AddTask />;
     case 'edit-task':
-      return task && <EditTask task={task} />;
+      return <EditTask />;
     case 'add-board':
       return <AddBoard />;
     case 'edit-board':
@@ -32,7 +31,7 @@ export default function Modal() {
     case 'delete-board':
       return board && <DeleteBoard board={board} />;
     case 'delete-task':
-      return task && <DeleteTask task={task} />;
+      return <DeleteTask />;
     default:
       return (
         <ModalTemplate>

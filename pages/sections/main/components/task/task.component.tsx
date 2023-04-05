@@ -1,11 +1,8 @@
 'use client';
 
 import { useAppDispatch } from '@/store/hooks';
-import {
-  setModalToggle,
-  setModalType,
-  setTask,
-} from '@/store/modal/modal.reducer';
+import { setModalToggle, setModalType } from '@/store/modal/modal.reducer';
+import { setCurrentTask } from '@/store/kanban/kanban.reducer';
 
 import { TTask } from '@/types/kanban.types';
 
@@ -17,7 +14,7 @@ export default function Task({ task }: Props) {
   const dispatch = useAppDispatch();
 
   const onClickHandler = () => {
-    dispatch(setTask(task));
+    dispatch(setCurrentTask(task));
     dispatch(setModalType('view-task'));
     dispatch(setModalToggle());
   };

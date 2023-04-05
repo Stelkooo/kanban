@@ -25,4 +25,6 @@ export type TSubtask = {
   id: number;
   title: string;
   isCompleted: boolean;
+  columnId: number;
+  taskId: number;
 };

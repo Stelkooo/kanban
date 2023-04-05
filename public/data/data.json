@@ -19,16 +19,22 @@
               "subtasks": [
                 {
                   "id": 1,
+                  "columnId": 1,
+                  "taskId": 1,
                   "title": "Sign up page",
                   "isCompleted": true
                 },
                 {
                   "id": 2,
+                  "columnId": 1,
+                  "taskId": 1,
                   "title": "Sign in page",
                   "isCompleted": false
                 },
                 {
                   "id": 3,
+                  "columnId": 1,
+                  "taskId": 1,
                   "title": "Welcome page",
                   "isCompleted": false
                 }
@@ -43,6 +49,8 @@
               "subtasks": [
                 {
                   "id": 1,
+                  "columnId": 1,
+                  "taskId": 2,
                   "title": "Search page",
                   "isCompleted": false
                 }
@@ -57,11 +65,15 @@
               "subtasks": [
                 {
                   "id": 1,
+                  "columnId": 1,
+                  "taskId": 3,
                   "title": "Account page",
                   "isCompleted": false
                 },
                 {
                   "id": 2,
+                  "columnId": 1,
+                  "taskId": 3,
                   "title": "Billing page",
                   "isCompleted": false
                 }
@@ -76,11 +88,15 @@
               "subtasks": [
                 {
                   "id": 1,
+                  "columnId": 1,
+                  "taskId": 4,
                   "title": "Internal testing",
                   "isCompleted": false
                 },
                 {
                   "id": 2,
+                  "columnId": 1,
+                  "taskId": 4,
                   "title": "External testing",
                   "isCompleted": false
                 }
@@ -90,11 +106,11 @@
         },
         {
           "id": 2,
-          "order": [1, 2, 3, 4, 5, 6],
+          "order": [5, 6, 7, 8, 9, 10],
           "name": "Doing",
           "tasks": [
             {
-              "id": 1,
+              "id": 5,
               "columnId": 2,
               "title": "Design settings and search pages",
               "description": null,
@@ -118,7 +134,7 @@
               ]
             },
             {
-              "id": 2,
+              "id": 6,
               "columnId": 2,
               "title": "Add account management endpoints",
               "description": null,
@@ -142,7 +158,7 @@
               ]
             },
             {
-              "id": 3,
+              "id": 7,
               "columnId": 2,
               "title": "Design onboarding flow",
               "description": null,
@@ -166,7 +182,7 @@
               ]
             },
             {
-              "id": 4,
+              "id": 8,
               "columnId": 2,
               "title": "Add search enpoints",
               "description": null,
@@ -185,7 +201,7 @@
               ]
             },
             {
-              "id": 5,
+              "id": 9,
               "columnId": 2,
               "title": "Add authentication endpoints",
               "description": null,
@@ -204,7 +220,7 @@
               ]
             },
             {
-              "id": 6,
+              "id": 10,
               "columnId": 2,
               "title": "Research pricing points of various competitors and trial different business models",
               "description": "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
@@ -231,11 +247,11 @@
         },
         {
           "id": 3,
-          "order": [1, 2, 3, 4, 5, 6, 7],
+          "order": [11, 12, 13, 14, 15, 16, 17],
           "name": "Done",
           "tasks": [
             {
-              "id": 1,
+              "id": 11,
               "columnId": 3,
               "title": "Conduct 5 wireframe tests",
               "description": "Ensure the layout continues to make sense and we have strong buy-in from potential users.",
@@ -249,7 +265,7 @@
               ]
             },
             {
-              "id": 2,
+              "id": 12,
               "columnId": 3,
               "title": "Create wireframe prototype",
               "description": "Create a greyscale clickable wireframe prototype to test our asssumptions so far.",
@@ -263,7 +279,7 @@
               ]
             },
             {
-              "id": 3,
+              "id": 13,
               "columnId": 3,
               "title": "Review results of usability tests and iterate",
               "description": "Keep iterating through the subtasks until we're clear on the core concepts for the app.",
@@ -287,7 +303,7 @@
               ]
             },
             {
-              "id": 4,
+              "id": 14,
               "columnId": 3,
               "title": "Create paper prototypes and conduct 10 usability tests with potential customers",
               "description": null,
@@ -306,7 +322,7 @@
               ]
             },
             {
-              "id": 5,
+              "id": 15,
               "columnId": 3,
               "title": "Market discovery",
               "description": "We need to define and refine our core product. Interviews will help us learn common pain points and help us define the strongest MVP.",
@@ -320,7 +336,7 @@
               ]
             },
             {
-              "id": 6,
+              "id": 16,
               "columnId": 3,
               "title": "Competitor analysis",
               "description": null,
@@ -339,7 +355,7 @@
               ]
             },
             {
-              "id": 7,
+              "id": 17,
               "columnId": 3,
               "title": "Research the market",
               "description": "We need to get a solid overview of the market to ensure we have up-to-date estimates of market size and demand.",

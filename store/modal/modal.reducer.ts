@@ -1,4 +1,4 @@
-import { TBoard, TTask } from '@/types/kanban.types';
+import { TBoard } from '@/types/kanban.types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 type TModalType =
@@ -13,15 +13,13 @@ type TModalType =
 type TInitialState = {
   isModalOpen: boolean;
   modalType: TModalType;
-  task: TTask | null;
-  board: TBoard | null;
+  boardId: number;
 };
 
 const MODAL_INITIAL_VALUE: TInitialState = {
   isModalOpen: false,
   modalType: 'view-task',
-  task: null,
-  board: null,
+  boardId: 0,
 };
 
 export const modalSlice = createSlice({
@@ -34,16 +32,12 @@ export const modalSlice = createSlice({
     setModalType: (state, action: PayloadAction<TModalType>) => {
       return { ...state, modalType: action.payload };
     },
-    setTask: (state, action: PayloadAction<TTask>) => {
-      return { ...state, task: action.payload };
-    },
     setBoard: (state, action: PayloadAction<TBoard>) => {
       return { ...state, board: action.payload };
     },
   },
 });
 
-export const { setModalToggle, setModalType, setTask, setBoard } =
-  modalSlice.actions;
+export const { setModalToggle, setModalType, setBoard } = modalSlice.actions;
 
 export const modalReducer = modalSlice.reducer;

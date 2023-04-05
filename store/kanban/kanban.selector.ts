@@ -1,5 +1,4 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { TBoard } from '@/types/kanban.types';
 import { RootState } from '../store';
 
 const selectKanbanReducer = (state: RootState) => state.kanban;
@@ -17,4 +16,9 @@ export const selectCurrentBoard = createSelector(
 export const selectCurrentColumns = createSelector(
   [selectCurrentBoard],
   (currentBoard) => currentBoard?.columns
+);
+
+export const selectCurrentTask = createSelector(
+  [selectKanbanReducer],
+  (kanban) => kanban.currentTask
 );

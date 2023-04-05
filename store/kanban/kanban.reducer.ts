@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { TBoard, TColumn, TTask } from '@/types/kanban.types';
+import { TBoard, TColumn, TSubtask, TTask } from '@/types/kanban.types';
 
 export const fetchBoards = createAsyncThunk('kanban/fetch', async () => {
   const data = await fetch('data/data.json', {
@@ -14,11 +14,13 @@ export const fetchBoards = createAsyncThunk('kanban/fetch', async () => {
 type TInitialState = {
   boards: TBoard[];
   currentBoardId: number;
+  currentTask: TTask | null;
 };
 
 const KANBAN_INITIAL_VALUE: TInitialState = {
   boards: [],
   currentBoardId: 0,
+  currentTask: null,
 };
 
 export const kanbanSlice = createSlice({
@@ -58,6 +60,35 @@ export const kanbanSlice = createSlice({
         1
       );
     },
+    setCurrentTask: (state, action: PayloadAction<TTask>) => {
+      return { ...state, currentTask: action.payload };
+    },
+    setTaskStatus: (state, action) => {
+      const board = state.boards.find((el) => el.id === state.currentBoardId);
+      if (board) {
+        const column = board.columns.find(
+          (el) => el.id === action.payload.task.columnId
+        );
+        const newColumn = board.columns.find(
+          (el) => el.id === action.payload.newColumnId
+        );
+        if (column && newColumn) {
+          const task = column.tasks.find(
+            (el) => el.id === action.payload.task.id
+          );
+          if (task) {
+            column.tasks.splice(column.tasks.indexOf(task), 1);
+            column.order.splice(
+              column.order.indexOf(action.payload.task.id),
+              1
+            );
+            newColumn.order.splice(-1, 0, task.id);
+            newColumn.tasks.splice(-1, 0, task);
+            task.columnId = newColumn.id;
+          }
+        }
+      }
+    },
     removeTask: (state, action: PayloadAction<TTask>) => {
       const board = state.boards.find((el) => el.id === state.currentBoardId);
       if (board) {
@@ -68,6 +99,25 @@ export const kanbanSlice = createSlice({
           column.order.splice(column.order.indexOf(action.payload.id), 1);
           const task = column.tasks.find((el) => el.id === action.payload.id);
           if (task) column.tasks.splice(column.tasks.indexOf(task), 1);
+        }
+      }
+    },
+    setSubtaskStatus: (state, action: PayloadAction<TSubtask>) => {
+      const board = state.boards.find((el) => el.id === state.currentBoardId);
+      if (board) {
+        const column = board.columns.find(
+          (el) => el.id === action.payload.columnId
+        );
+        if (column) {
+          const task = column.tasks.find(
+            (el) => el.id === action.payload.taskId
+          );
+          if (task) {
+            const subtask = task.subtasks.find(
+              (el) => el.id === action.payload.id
+            );
+            if (subtask) subtask.isCompleted = !action.payload.isCompleted;
+          }
         }
       }
     },
@@ -90,7 +140,10 @@ export const {
   setBoardName,
   setBoardColumns,
   removeBoard,
+  setCurrentTask,
+  setTaskStatus,
   removeTask,
+  setSubtaskStatus,
 } = kanbanSlice.actions;
 
 export const kanbanReducer = kanbanSlice.reducer;
