@@ -62,9 +62,9 @@ export const kanbanSlice = createSlice({
     //     1
     //   );
     // },
-    // setCurrentTask: (state, action: PayloadAction<TTask>) => {
-    //   return { ...state, currentTask: action.payload };
-    // },
+    setCurrentTask: (state, action: PayloadAction<TTask>) => {
+      return { ...state, currentTask: action.payload };
+    },
     // createTask: (state, action) => {
     //   const board = state.boards.find((el) => el.id === state.currentBoardId);
     //   if (board) {
@@ -163,18 +163,18 @@ export const kanbanSlice = createSlice({
   },
 });
 
-// export const {
-//   setCurrentBoardId,
-//   setFirstBoardAsCurrent,
-//   createBoard,
-//   setBoardName,
-//   setBoardColumns,
-//   removeBoard,
-//   setCurrentTask,
-//   createTask,
-//   setTaskStatus,
-//   removeTask,
-//   setSubtaskStatus,
-// } = kanbanSlice.actions;
+export const {
+  // setCurrentBoardId,
+  // setFirstBoardAsCurrent,
+  // createBoard,
+  // setBoardName,
+  // setBoardColumns,
+  // removeBoard,
+  setCurrentTask,
+  // createTask,
+  // setTaskStatus,
+  // removeTask,
+  // setSubtaskStatus,
+} = kanbanSlice.actions;
 
 export const kanbanReducer = kanbanSlice.reducer;

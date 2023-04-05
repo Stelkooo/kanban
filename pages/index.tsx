@@ -4,10 +4,7 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { fetchBoards } from '@/store/kanban/kanban.reducer';
-import {
-  selectBoards,
-  selectBoardsIsLoading,
-} from '@/store/kanban/kanban.selector';
+import { selectBoardsIsLoading } from '@/store/kanban/kanban.selector';
 // selectCurrentBoard,
 
 import { Plus_Jakarta_Sans } from 'next/font/google';
@@ -20,10 +17,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
 export default function Home() {
   const dispatch = useAppDispatch();
-
-  const boards = useAppSelector(selectBoards);
   const boardsIsLoading = useAppSelector(selectBoardsIsLoading);
-  // const currentBoard = useAppSelector(selectCurrentBoard);
 
   useEffect(() => {
     (async () => {
@@ -44,9 +38,9 @@ export default function Home() {
           <h1>Loading...</h1>
         ) : (
           <>
-            {/* <Sidebar boards={boards} currentBoard={currentBoard} /> */}
+            <Sidebar />
             <Header />
-            {/* <Main board={currentBoard} /> */}
+            <Main />
           </>
         )}
       </div>

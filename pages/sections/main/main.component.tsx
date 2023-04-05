@@ -28,7 +28,7 @@ export default function Main() {
       ) : (
         <Columns />
       )}
-      {isModalOpen && <Modal />}
+      {/* {isModalOpen && <Modal />} */}
     </main>
   );
 }
