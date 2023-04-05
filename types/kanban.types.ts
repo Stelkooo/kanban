@@ -1,30 +1,34 @@
 export type TBoard = {
-  id: number;
-  order: number[];
+  id: string;
   name: string;
-  columns: TColumn[];
+  columns?: TColumn[];
 };
 
 export type TColumn = {
-  id: number;
-  order: number[];
-  name: string;
-  tasks: TTask[];
+  id: string;
+  order?: string[];
+  name?: string;
+  tasks?: TTask[];
+  board?: {
+    id: string;
+  };
 };
 
 export type TTask = {
-  id: number;
-  columnId: number;
-  title: string;
-  description: string | null;
-  status: string;
-  subtasks: TSubtask[];
+  id: string;
+  column?: {
+    id: string;
+  };
+  title?: string;
+  description?: string | null;
+  subtasks?: TSubtask[];
 };
 
 export type TSubtask = {
-  id: number;
-  title: string;
-  isCompleted: boolean;
-  columnId: number;
-  taskId: number;
+  id: string;
+  isCompleted?: boolean;
+  title?: string;
+  task?: {
+    id: string;
+  };
 };

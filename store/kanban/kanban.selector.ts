@@ -8,6 +8,11 @@ export const selectBoards = createSelector(
   (kanban) => kanban.boards
 );
 
+export const selectBoardsIsLoading = createSelector(
+  [selectKanbanReducer],
+  (kanban) => kanban.boardsIsLoading
+);
+
 export const selectCurrentBoard = createSelector(
   [selectKanbanReducer],
   (kanban) => kanban.boards.find((board) => board.id === kanban.currentBoardId)

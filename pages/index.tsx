@@ -6,8 +6,9 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { fetchBoards } from '@/store/kanban/kanban.reducer';
 import {
   selectBoards,
-  selectCurrentBoard,
+  selectBoardsIsLoading,
 } from '@/store/kanban/kanban.selector';
+// selectCurrentBoard,
 
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
@@ -19,11 +20,15 @@ const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
 export default function Home() {
   const dispatch = useAppDispatch();
+
   const boards = useAppSelector(selectBoards);
-  const currentBoard = useAppSelector(selectCurrentBoard);
+  const boardsIsLoading = useAppSelector(selectBoardsIsLoading);
+  // const currentBoard = useAppSelector(selectCurrentBoard);
 
   useEffect(() => {
-    dispatch(fetchBoards());
+    (async () => {
+      await dispatch(fetchBoards());
+    })();
   }, [dispatch]);
   return (
     <>
@@ -35,9 +40,15 @@ export default function Home() {
       <div
         className={`${plusJakartaSans.className} grid h-screen grid-cols-[min-content_1fr] grid-rows-[min-content_1fr] overflow-hidden`}
       >
-        <Sidebar boards={boards} currentBoard={currentBoard} />
-        <Header />
-        <Main board={currentBoard} />
+        {boardsIsLoading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <>
+            {/* <Sidebar boards={boards} currentBoard={currentBoard} /> */}
+            <Header />
+            {/* <Main board={currentBoard} /> */}
+          </>
+        )}
       </div>
     </>
   );

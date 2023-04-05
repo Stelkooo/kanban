@@ -24,24 +24,16 @@ export default function MoreOptions({ optionsAbout }: Props) {
   };
 
   const editHandler = () => {
-    if (optionsAbout === 'task') {
-      setIsPopupOpen(!isPopupOpen);
-      dispatch(setModalType('edit-task'));
-    }
+    setIsPopupOpen(!isPopupOpen);
+    dispatch(setModalType(`edit-${optionsAbout}`));
     if (optionsAbout === 'board') {
-      setIsPopupOpen(!isPopupOpen);
-      dispatch(setModalType('edit-board'));
       dispatch(setModalToggle());
     }
   };
   const deleteHandler = () => {
-    if (optionsAbout === 'task') {
-      setIsPopupOpen(!isPopupOpen);
-      dispatch(setModalType('delete-task'));
-    }
+    setIsPopupOpen(!isPopupOpen);
+    dispatch(setModalType(`delete-${optionsAbout}`));
     if (optionsAbout === 'board') {
-      setIsPopupOpen(!isPopupOpen);
-      dispatch(setModalType('delete-board'));
       dispatch(setModalToggle());
     }
   };
