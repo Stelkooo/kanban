@@ -5,16 +5,7 @@ import Sun from '@/public/assets/icon-light-theme.svg';
 import Moon from '@/public/assets/icon-dark-theme.svg';
 import HideSidebar from '@/public/assets/icon-hide-sidebar.svg';
 
-import { TBoard } from '@/types/kanban.types';
-
-import Boards from './components/boards.component';
-
-type Props = {
-  boards: TBoard[];
-  currentBoard: TBoard;
-};
-
-export default function Sidebar({ boards, currentBoard }: Props) {
+export default function Sidebar() {
   return (
     <div className="flex w-max flex-col justify-center md:row-span-2 md:w-[260px] md:justify-start md:gap-[54px] md:border-b md:border-r md:border-lines-light md:pb-8 md:pt-7">
       <div className="pl-4 md:pl-3.5">
@@ -28,7 +19,7 @@ export default function Sidebar({ boards, currentBoard }: Props) {
         </picture>
       </div>
       {/* <div className="fixed inset-0 z-40 mt-[4.5rem] h-full w-full bg-black opacity-60" /> */}
-      <div className="fixed left-1/2 z-50 hidden w-[264px] -translate-x-1/2 flex-col gap-4 rounded-lg bg-white py-4 md:static md:left-0 md:z-0 md:flex md:h-full md:w-60 md:-translate-x-0 md:justify-start md:gap-[18px] md:p-0">
+      {/* <div className="fixed left-1/2 z-50 hidden w-[264px] -translate-x-1/2 flex-col gap-4 rounded-lg bg-white py-4 md:static md:left-0 md:z-0 md:flex md:h-full md:w-60 md:-translate-x-0 md:justify-start md:gap-[18px] md:p-0">
         <h2 className="heading-small px-6 md:pr-0">
           All Boards ({boards.length})
         </h2>
@@ -54,7 +45,7 @@ export default function Sidebar({ boards, currentBoard }: Props) {
           <Image src={HideSidebar} alt="" />
           <p className="heading-medium text-medium-grey">Hide Sidebar</p>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

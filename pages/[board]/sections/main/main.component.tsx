@@ -1,28 +1,15 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-
 import _ from 'lodash';
 
-import { TBoard, TColumn } from '@/types/kanban.types';
+import { TBoard } from '@/types/kanban.types';
 
-import Button from '@/pages/components/button/button.component';
+import Button from '@/pages/[board]/components/button/button.component';
 import Columns from './components/columns/columns.component';
-
-import { sortByOrder } from './utilities';
 
 type Props = {
   board: TBoard;
 };
 
 export default function Main({ board }: Props) {
-  const [columns, setColumns] = useState<TColumn[]>([]);
-
-  useEffect(() => {
-    if (board.columns)
-      setColumns(sortByOrder(board.columns, board.order, 'id'));
-  }, [board]);
-
   return (
     <main className="relative col-span-2 flex gap-6 overflow-auto bg-light-grey px-4 py-6 md:col-span-1">
       {_.isEmpty(board) ? (
@@ -35,7 +22,7 @@ export default function Main({ board }: Props) {
           </Button>
         </div>
       ) : (
-        <Columns columns={columns} />
+        <Columns columns={board.columns} />
       )}
       {/* <Sidebar boards={data.boards} currentBoard={board} /> */}
     </main>
