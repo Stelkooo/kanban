@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 'use client';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setModalToggle } from '@/store/modal/modal.reducer';
 import { removeTask } from '@/store/kanban/kanban.reducer';
 import { selectCurrentTask } from '@/store/kanban/kanban.selector';
+=======
+import { TTask } from '@/pages/types/kanban.types';
+>>>>>>> parent of bd25395 (types folder moved to root)
 
 import Button from '@/pages/components/button/button.component';
 import ModalTemplate from '../modal-template/modal-template.component';

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 
-import { TColumn } from '@/types/kanban.types';
+import { TColumn } from '@/pages/types/kanban.types';
 
 import Cross from '@/public/assets/icon-cross.svg';
 import Button from '@/pages/components/button/button.component';

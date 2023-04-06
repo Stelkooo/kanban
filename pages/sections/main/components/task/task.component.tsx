@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client';
 
 import { useAppDispatch } from '@/store/hooks';
@@ -5,6 +6,9 @@ import { setModalToggle, setModalType } from '@/store/modal/modal.reducer';
 import { setCurrentTask } from '@/store/kanban/kanban.reducer';
 
 import { TTask } from '@/types/kanban.types';
+=======
+import { TTask } from '@/pages/types/kanban.types';
+>>>>>>> parent of bd25395 (types folder moved to root)
 
 type Props = {
   task: TTask;

@@ -3,9 +3,13 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
 
 import Select, { StylesConfig } from 'react-select';
+<<<<<<< HEAD
 
 import { useAppSelector } from '@/store/hooks';
 import { selectCurrentColumns } from '@/store/kanban/kanban.selector';
+=======
+import { TColumn } from '@/pages/types/kanban.types';
+>>>>>>> parent of bd25395 (types folder moved to root)
 
 type OptionType = { value: number; label: string };
 type OptionsType = Array<OptionType>;

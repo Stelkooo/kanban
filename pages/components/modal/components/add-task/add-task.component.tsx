@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client';
 
 import { useState } from 'react';
@@ -5,6 +6,9 @@ import { useAppDispatch } from '@/store/hooks';
 import { createTask } from '@/store/kanban/kanban.reducer';
 
 import { TColumn, TSubtask } from '@/types/kanban.types';
+=======
+import { TColumn } from '@/pages/types/kanban.types';
+>>>>>>> parent of bd25395 (types folder moved to root)
 
 import Button from '@/pages/components/button/button.component';
 import ModalTemplate from '../modal-template/modal-template.component';

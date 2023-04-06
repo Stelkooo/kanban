@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 'use client';
 
 import { useAppDispatch } from '@/store/hooks';
 import { setSubtaskStatus } from '@/store/kanban/kanban.reducer';
 
 import { TSubtask } from '@/types/kanban.types';
+=======
+import { TSubtask } from '@/pages/types/kanban.types';
+>>>>>>> parent of bd25395 (types folder moved to root)
 
 type Props = {
   subtask: TSubtask;

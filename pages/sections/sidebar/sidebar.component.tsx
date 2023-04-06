@@ -5,7 +5,7 @@ import Sun from '@/public/assets/icon-light-theme.svg';
 import Moon from '@/public/assets/icon-dark-theme.svg';
 import HideSidebar from '@/public/assets/icon-hide-sidebar.svg';
 
-import { TBoard } from '@/types/kanban.types';
+import { TBoard } from '@/pages/types/kanban.types';
 
 import Boards from '@/pages/components/modal/components/select-board/boards/boards.component';
 

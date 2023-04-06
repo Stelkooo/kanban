@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client';
 
 import { useState } from 'react';
@@ -9,6 +10,9 @@ import { selectBoards } from '@/store/kanban/kanban.selector';
 
 import { TColumn } from '@/types/kanban.types';
 
+=======
+import { TBoard } from '@/pages/types/kanban.types';
+>>>>>>> parent of bd25395 (types folder moved to root)
 import Button from '@/pages/components/button/button.component';
 import ModalTemplate from '../modal-template/modal-template.component';
 import Columns from './columns/columns.component';

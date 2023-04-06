@@ -1,11 +1,15 @@
 'use client';
 
 import Select, { StylesConfig } from 'react-select';
+<<<<<<< HEAD
 
 import { useAppSelector } from '@/store/hooks';
 import { selectCurrentColumns } from '@/store/kanban/kanban.selector';
 
 import { TTask } from '@/types/kanban.types';
+=======
+import { TColumn, TTask } from '@/pages/types/kanban.types';
+>>>>>>> parent of bd25395 (types folder moved to root)
 
 type OptionType = { value: number; label: string };
 type OptionsType = Array<OptionType>;

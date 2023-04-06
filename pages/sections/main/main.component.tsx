@@ -6,6 +6,11 @@ import { selectIsModalOpen } from '@/store/modal/modal.selector';
 
 import _ from 'lodash';
 
+<<<<<<< HEAD
+=======
+import { TBoard, TColumn } from '@/pages/types/kanban.types';
+
+>>>>>>> parent of bd25395 (types folder moved to root)
 import Button from '@/pages/components/button/button.component';
 import Modal from '@/pages/components/modal/modal.component';
 import Columns from './components/columns/columns.component';

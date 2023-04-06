@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 'use client';
 
 import { useAppSelector } from '@/store/hooks';
 import { selectCurrentTask } from '@/store/kanban/kanban.selector';
+=======
+import { TColumn, TTask } from '@/pages/types/kanban.types';
+>>>>>>> parent of bd25395 (types folder moved to root)
 
 import Button from '@/pages/components/button/button.component';
 import ModalTemplate from '../modal-template/modal-template.component';
