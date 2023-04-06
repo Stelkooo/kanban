@@ -1,22 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
-
-import { TSubtask } from '@/types/kanban.types';
+import { useState } from 'react';
 
 import Cross from '@/public/assets/icon-cross.svg';
 import Button from '@/pages/components/button/button.component';
 
-type Props = {
-  subtasks: Array<Partial<TSubtask>>;
-  setSubtasks: Dispatch<SetStateAction<Array<Partial<TSubtask>>>>;
-};
-
-export default function Subtasks({ subtasks, setSubtasks }: Props) {
-  const removeHandler = (index: number) => {
+export default function Subtasks() {
+  const [subtasks, setSubtasks] = useState([
+    { title: '', id: 1 },
+    { title: '', id: 2 },
+  ]);
+  const removeHandler = (id: number) => {
     if (subtasks.length > 1)
-      setSubtasks(subtasks.filter((subtask) => subtask.id !== index));
+      setSubtasks(subtasks.filter((subtask) => subtask.id !== id));
   };
   const onChangeHandler = (index: number, e: HTMLInputElement) => {
     setSubtasks(
@@ -26,28 +23,28 @@ export default function Subtasks({ subtasks, setSubtasks }: Props) {
     );
   };
   const addHandler = () => {
-    setSubtasks([...subtasks, { title: '', id: subtasks.length + 1 }]);
-  };
-  useEffect(() => {
     setSubtasks([
-      { title: '', id: 0 },
-      { title: '', id: 1 },
+      ...subtasks,
+      { title: '', id: subtasks[subtasks.length - 1].id + 1 },
     ]);
-  }, [setSubtasks]);
+  };
   return (
     <div>
       <p className="body-medium mb-2 text-medium-grey">Subtasks</p>
       <div className="grid gap-y-2">
-        {subtasks.map((subtask, index) => (
+        {subtasks.map((subtask) => (
           <div className="flex items-center" key={subtask.id}>
             <input
               type="text"
               className="body-large mr-4 w-full rounded-[4px] border border-lines-light px-4 py-2"
               placeholder="e.g. Take coffee break"
               defaultValue={subtask.title}
-              onChange={(e) => onChangeHandler(index, e.currentTarget)}
+              onChange={(e) => onChangeHandler(subtask.id, e.currentTarget)}
             />
-            <Button btnStyle="clear" onClickFunc={() => removeHandler(index)}>
+            <Button
+              btnStyle="clear"
+              onClickFunc={() => removeHandler(subtask.id)}
+            >
               <Image
                 src={Cross}
                 alt="Click to remove subtask"

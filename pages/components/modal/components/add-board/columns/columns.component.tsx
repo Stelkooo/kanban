@@ -1,48 +1,33 @@
 'use client';
 
 import Image from 'next/image';
-import { Dispatch, SetStateAction, useEffect } from 'react';
-
-import { TColumn } from '@/types/kanban.types';
+import { useState } from 'react';
 
 import Cross from '@/public/assets/icon-cross.svg';
 import Button from '@/pages/components/button/button.component';
 
-type Props = {
-  columns: TColumn[];
-  setColumns: Dispatch<SetStateAction<TColumn[]>>;
-};
-
-export default function Columns({ columns, setColumns }: Props) {
+export default function Columns() {
+  const [columns, setColumns] = useState([
+    { title: 'Todo', id: 1 },
+    { title: 'Doing', id: 2 },
+  ]);
   const removeHandler = (id: number) => {
     if (columns.length > 1)
-      setColumns(columns.filter((item) => item.id !== id));
+      setColumns(columns.filter((subtask) => subtask.id !== id));
   };
   const onChangeHandler = (index: number, e: HTMLInputElement) => {
     setColumns(
       columns.map((item) =>
-        item.id === index ? { ...item, name: e.value } : item
+        item.id === index ? { ...item, title: e.value } : item
       )
     );
   };
   const addHandler = () => {
     setColumns([
       ...columns,
-      {
-        name: '',
-        id: columns[columns.length - 1].id + 1,
-        order: [],
-        tasks: [],
-      },
+      { title: '', id: columns[columns.length - 1].id + 1 },
     ]);
   };
-
-  useEffect(() => {
-    setColumns([
-      { name: 'Todo', id: 1, order: [], tasks: [] },
-      { name: 'Doing', id: 2, order: [], tasks: [] },
-    ]);
-  }, [setColumns]);
   return (
     <div>
       <p className="body-medium mb-2 text-medium-grey">Columns</p>
@@ -53,7 +38,7 @@ export default function Columns({ columns, setColumns }: Props) {
               type="text"
               className="body-large mr-4 w-full rounded-[4px] border border-lines-light px-4 py-2"
               placeholder="e.g. Done"
-              defaultValue={column.name}
+              defaultValue={column.title}
               onChange={(e) => onChangeHandler(column.id, e.currentTarget)}
             />
             <Button

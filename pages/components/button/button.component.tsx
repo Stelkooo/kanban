@@ -26,7 +26,6 @@ export default function Button({
     'items-center',
     'justify-center',
     'gap-2',
-    'transition-colors',
   ];
   // add padding
   if (btnStyle !== 'clear') {
@@ -45,13 +44,7 @@ export default function Button({
       'disabled:opacity-25',
       'hover:bg-purple-hover'
     );
-  if (btnStyle === 'secondary')
-    classNames.push(
-      'bg-light-grey',
-      'text-purple',
-      'hover:bg-medium-grey',
-      'hover:bg-opacity-25'
-    );
+  if (btnStyle === 'secondary') classNames.push('bg-light-grey', 'text-purple');
   if (btnStyle === 'destructive')
     classNames.push('bg-red', 'text-white', 'hover:bg-red-hover');
 

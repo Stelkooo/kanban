@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import Cross from '@/public/assets/icon-cross.svg';
 import Button from '@/pages/components/button/button.component';
-import { TSubtask } from '@/pages/types/kanban.types';
+import { TSubtask } from '@/types/kanban.types';
 
 type Props = {
   subtasks: TSubtask[];

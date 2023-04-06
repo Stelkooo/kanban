@@ -1,27 +1,31 @@
 'use client';
 
-import { useAppSelector } from '@/store/hooks';
-import { selectCurrentBoard } from '@/store/kanban/kanban.selector';
-import { selectIsModalOpen } from '@/store/modal/modal.selector';
+import { useState, useEffect } from 'react';
 
 import _ from 'lodash';
 
-<<<<<<< HEAD
-=======
-import { TBoard, TColumn } from '@/pages/types/kanban.types';
+import { TBoard, TColumn } from '@/types/kanban.types';
 
->>>>>>> parent of bd25395 (types folder moved to root)
 import Button from '@/pages/components/button/button.component';
-import Modal from '@/pages/components/modal/modal.component';
 import Columns from './components/columns/columns.component';
 
-export default function Main() {
-  const board = useAppSelector(selectCurrentBoard);
-  const isModalOpen = useAppSelector(selectIsModalOpen);
+import { sortByOrder } from './utilities';
+
+type Props = {
+  board: TBoard;
+};
+
+export default function Main({ board }: Props) {
+  const [columns, setColumns] = useState<TColumn[]>([]);
+
+  useEffect(() => {
+    if (board.columns)
+      setColumns(sortByOrder(board.columns, board.order, 'id'));
+  }, [board]);
 
   return (
     <main className="relative col-span-2 flex gap-6 overflow-auto bg-light-grey px-4 py-6 md:col-span-1">
-      {board && _.isEmpty(board) ? (
+      {_.isEmpty(board) ? (
         <div className="absolute top-1/2 -translate-y-1/2 px-4 text-center">
           <h2 className="heading-large mb-6 text-medium-grey">
             This board is empty. Create a new column to get started.
@@ -31,9 +35,9 @@ export default function Main() {
           </Button>
         </div>
       ) : (
-        <Columns />
+        <Columns columns={columns} />
       )}
-      {/* {isModalOpen && <Modal />} */}
+      {/* <Sidebar boards={data.boards} currentBoard={board} /> */}
     </main>
   );
 }
