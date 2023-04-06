@@ -1,7 +1,7 @@
 import { TTask } from '@/types/kanban.types';
 
 import Button from '@/pages/components/button/button.component';
-import Modal from '../../modal.component';
+import Modal from '../template-modal/template-modal.component';
 
 type Props = { task: TTask };
 

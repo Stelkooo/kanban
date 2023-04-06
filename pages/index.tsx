@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
-import boardApi from '@/store/api/store';
+import boardApi from '@/store/api/api.store';
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 

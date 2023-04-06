@@ -1,14 +1,47 @@
-type Props = {
-  children: JSX.Element[];
-};
+'use client';
 
-export default function Modal({ children }: Props) {
-  return (
-    <>
-      <div className="fixed inset-0 z-40 h-full w-full bg-black opacity-60" />
-      <div className="fixed left-1/2 top-1/2 z-50 flex w-[343px] -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-md bg-white p-6">
-        {children}
-      </div>
-    </>
-  );
+import { useAppSelector } from '@/store/hooks';
+import {
+  selectModalType,
+  selectBoard,
+  selectTask,
+} from '@/store/modal/modal.selector';
+
+import ViewTask from './components/view-task/view-task.component';
+import AddTask from './components/add-task/add-task.component';
+import EditTask from './components/edit-task/edit-task.component';
+import TemplateModal from './components/template-modal/template-modal.component';
+import AddBoard from './components/add-board/add-board.component';
+import EditBoard from './components/edit-board/edit-board.component';
+import DeleteBoard from './components/delete-board/delete-board.component';
+import DeleteTask from './components/delete-task/delete-task.component';
+
+export default function Modal() {
+  const modalType = useAppSelector(selectModalType);
+  const board = useAppSelector(selectBoard);
+  const task = useAppSelector(selectTask);
+
+  switch (modalType) {
+    // case 'view-task':
+    //   return <ViewTask />;
+    // case 'add-task':
+    //   return <AddTask />;
+    // case 'edit-task':
+    //   return <EditTask />;
+    // case 'add-board':
+    //   return <AddBoard />;
+    // case 'edit-board':
+    //   return board && <EditBoard board={board} />;
+    // case 'delete-board':
+    //   return board && <DeleteBoard board={board} />;
+    // case 'delete-task':
+    //   return <DeleteTask />;
+    default:
+      return (
+        <TemplateModal>
+          <p>Modal does not exist :/</p>
+          <p>How did you manage this then?</p>
+        </TemplateModal>
+      );
+  }
 }

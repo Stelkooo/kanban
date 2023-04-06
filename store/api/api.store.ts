@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TBoard } from '@/types/kanban.types';
 
-const boardApi = createApi({
+export const boardApi = createApi({
   reducerPath: 'boardApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'api' }),
   tagTypes: ['Boards', 'Board'],
@@ -17,4 +17,6 @@ const boardApi = createApi({
   }),
 });
 
-export default boardApi;
+export const boardApiReducer = boardApi.reducer;
+
+export const boardApiMiddleware = boardApi.middleware;

@@ -2,13 +2,13 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 
-import { ApiProvider } from '@reduxjs/toolkit/query/react';
-import boardApi from '@/store/api/store';
+import { store } from '@/store/store';
+import { Provider } from 'react-redux';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ApiProvider api={boardApi}>
+    <Provider store={store}>
       <Component {...pageProps} />
-    </ApiProvider>
+    </Provider>
   );
 }

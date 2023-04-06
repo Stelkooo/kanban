@@ -1,7 +1,7 @@
 import { TColumn, TTask } from '@/types/kanban.types';
 
 import Button from '@/pages/components/button/button.component';
-import Modal from '../../modal.component';
+import Modal from '../template-modal/template-modal.component';
 import Subtasks from './subtasks/subtasks.component';
 import Status from './status/status.component';
 

@@ -1,15 +1,22 @@
+'use client';
+
+import { useAppSelector } from '@/store/hooks';
+import { selectIsModalOpen } from '@/store/modal/modal.selector';
+
 import _ from 'lodash';
 
 import { TBoard } from '@/types/kanban.types';
 
 import Button from '@/pages/[board]/components/button/button.component';
 import Columns from './components/columns/columns.component';
+import Modal from '../../components/modal/modal.component';
 
 type Props = {
   board: TBoard;
 };
 
 export default function Main({ board }: Props) {
+  const isModalOpen = useAppSelector(selectIsModalOpen);
   return (
     <main className="relative col-span-2 flex gap-6 overflow-auto bg-light-grey px-4 py-6 md:col-span-1">
       {_.isEmpty(board) ? (
@@ -24,7 +31,7 @@ export default function Main({ board }: Props) {
       ) : (
         <Columns columns={board.columns} />
       )}
-      {/* <Sidebar boards={data.boards} currentBoard={board} /> */}
+      {isModalOpen && <Modal />}
     </main>
   );
 }
