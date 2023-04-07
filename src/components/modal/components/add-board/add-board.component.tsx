@@ -1,5 +1,5 @@
 import { TBoard } from '@/types/kanban.types';
-import Button from '@/pages/[board]/components/button/button.component';
+import Button from '@/src/components/button/button.component';
 import Modal from '../template-modal/template-modal.component';
 import Columns from './columns/columns.component';
 

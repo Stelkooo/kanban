@@ -6,8 +6,8 @@ import AddTask from '@/public/assets/icon-add-task-mobile.svg';
 import ChevronDown from '@/public/assets/icon-chevron-down.svg';
 import ChevronUp from '@/public/assets/icon-chevron-up.svg';
 
-import Button from '../../components/button/button.component';
-import MoreOptions from '../../components/more-options/more-options.component';
+import Button from '@/src/components/button/button.component';
+import MoreOptions from '@/src/components/more-options/more-options.component';
 
 type Props = {
   board: TBoard;

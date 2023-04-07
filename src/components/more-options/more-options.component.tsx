@@ -14,7 +14,7 @@ import {
 
 import { TBoard } from '@/types/kanban.types';
 
-import Button from '../button/button.component';
+import Button from '@/src/components/button/button.component';
 
 type Props = {
   optionsAbout: 'task' | 'board';

@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { TColumn } from '@/types/kanban.types';
 
 import Cross from '@/public/assets/icon-cross.svg';
-import Button from '@/pages/[board]/components/button/button.component';
+import Button from '@/src/components/button/button.component';
 
 type Props = {
   columns: Array<Partial<TColumn>>;

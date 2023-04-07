@@ -7,9 +7,9 @@ import _ from 'lodash';
 
 import { TBoard } from '@/types/kanban.types';
 
-import Button from '@/pages/[board]/components/button/button.component';
+import Button from '@/src/components/button/button.component';
+import Modal from '@/src/components/modal/modal.component';
 import Columns from './components/columns/columns.component';
-import Modal from '../../components/modal/modal.component';
 
 type Props = {
   board: TBoard;

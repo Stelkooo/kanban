@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
 import { boardApi } from '@/store/api/api.store';
-import Header from './sections/header/header.component';
-import Main from './sections/main/main.component';
-import Sidebar from './sections/sidebar/sidebar.component';
+import Header from '@/src/sections/header/header.component';
+import Main from '@/src/sections/main/main.component';
+import Sidebar from '@/src/sections/sidebar/sidebar.component';
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
