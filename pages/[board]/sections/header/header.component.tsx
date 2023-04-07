@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 import { TBoard } from '@/types/kanban.types';
 
-import ChevronDown from '@/public/assets/icon-chevron-down.svg';
-import ChevronUp from '@/public/assets/icon-chevron-Up.svg';
 import AddTask from '@/public/assets/icon-add-task-mobile.svg';
+import ChevronDown from '@/public/assets/icon-chevron-down.svg';
+import ChevronUp from '@/public/assets/icon-chevron-up.svg';
 
 import Button from '../../components/button/button.component';
 import MoreOptions from '../../components/more-options/more-options.component';
