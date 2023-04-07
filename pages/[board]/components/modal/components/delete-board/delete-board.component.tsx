@@ -1,14 +1,13 @@
 import { TBoard } from '@/types/kanban.types';
 
-import Button from '@/pages/components/button/button.component';
+import Button from '@/pages/[board]/components/button/button.component';
 import Modal from '../template-modal/template-modal.component';
 
 type Props = { board: TBoard };
 
 export default function DeleteBoard({ board }: Props) {
   return (
-    <Modal>
-      <h3 className="heading-large text-red">Delete this board?</h3>
+    <Modal heading="Delete this board?">
       <p className="body-large text-medium-grey">
         Are you sure you want to delete the ‘{board.name}’ board? This action
         will remove all columns and tasks and cannot be reversed.

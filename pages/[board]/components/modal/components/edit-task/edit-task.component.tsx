@@ -1,6 +1,6 @@
 import { TColumn, TTask } from '@/types/kanban.types';
 
-import Button from '@/pages/components/button/button.component';
+import Button from '@/pages/[board]/components/button/button.component';
 import Modal from '../template-modal/template-modal.component';
 import Subtasks from './subtasks/subtasks.component';
 import Status from './status/status.component';
@@ -12,7 +12,7 @@ type Props = {
 
 export default function EditTask({ task, columns }: Props) {
   return (
-    <Modal>
+    <Modal heading="Edit Task">
       <h3 className="heading-large">Edit Task</h3>
       <label htmlFor="title" className="grid gap-y-2">
         <p className="body-medium text-medium-grey">Title</p>
@@ -33,7 +33,7 @@ export default function EditTask({ task, columns }: Props) {
           placeholder="e.g. It’s always good to take a break. This 
           15 minute break will  recharge the batteries 
           a little."
-          defaultValue={task.description}
+          defaultValue={task.description as string}
         />
       </label>
       <Subtasks subtasks={task.subtasks} />

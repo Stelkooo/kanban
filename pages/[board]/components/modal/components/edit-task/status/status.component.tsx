@@ -3,7 +3,7 @@
 import Select, { StylesConfig } from 'react-select';
 import { TColumn, TTask } from '@/types/kanban.types';
 
-type OptionType = { value: number; label: string };
+type OptionType = { value: string; label: string };
 type OptionsType = Array<OptionType>;
 
 const statusStyles: StylesConfig = {
@@ -57,7 +57,7 @@ export default function Status({ columns, task }: Props) {
       <p className="body-medium mb-2 text-medium-grey">Status</p>
       <Select
         options={options}
-        defaultValue={options.find((option) => option.label === task.status)}
+        defaultValue={options.find((option) => option.value === task.column.id)}
         isSearchable={false}
         styles={statusStyles}
       />

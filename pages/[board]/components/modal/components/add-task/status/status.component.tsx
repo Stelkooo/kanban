@@ -3,7 +3,7 @@
 import Select, { StylesConfig } from 'react-select';
 import { TColumn } from '@/types/kanban.types';
 
-type OptionType = { value: number; label: string };
+type OptionType = { value: string; label: string };
 type OptionsType = Array<OptionType>;
 
 const statusStyles: StylesConfig = {

@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import Cross from '@/public/assets/icon-cross.svg';
-import Button from '@/pages/components/button/button.component';
 import { TSubtask } from '@/types/kanban.types';
+
+import Cross from '@/public/assets/icon-cross.svg';
+import Button from '@/pages/[board]/components/button/button.component';
 
 type Props = {
   subtasks: TSubtask[];

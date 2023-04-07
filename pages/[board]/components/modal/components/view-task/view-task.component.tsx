@@ -8,9 +8,10 @@ type Props = {
 
 export default function ViewTask({ task }: Props) {
   return (
-    <Modal>
+    <Modal heading={task.title}>
       <h3 className="heading-large">{task.title}</h3>
-      {task.description ? <p>{task.description}</p> : null}
+      {/* {(task.description as string) !== '' &&
+        ((<p>{task.description}</p>) as JSX.Element)} */}
       <Subtasks subtasks={task.subtasks} />
     </Modal>
   );

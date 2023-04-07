@@ -1,5 +1,5 @@
 import { TBoard } from '@/types/kanban.types';
-import Button from '@/pages/components/button/button.component';
+import Button from '@/pages/[board]/components/button/button.component';
 import Modal from '../template-modal/template-modal.component';
 import Columns from './columns/columns.component';
 
@@ -9,8 +9,7 @@ type Props = {
 
 export default function AddBoard({ board }: Props) {
   return (
-    <Modal>
-      <h3 className="heading-large">Add New Board</h3>
+    <Modal heading="Add New Board">
       <label htmlFor="title" className="grid gap-y-2">
         <p className="body-medium text-medium-grey">Name</p>
         <input

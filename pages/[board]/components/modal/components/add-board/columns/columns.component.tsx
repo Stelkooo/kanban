@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Cross from '@/public/assets/icon-cross.svg';
-import Button from '@/pages/components/button/button.component';
+import Button from '@/pages/[board]/components/button/button.component';
 
 export default function Columns() {
   const [columns, setColumns] = useState([
