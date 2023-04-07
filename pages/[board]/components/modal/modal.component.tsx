@@ -30,16 +30,15 @@ export default function Modal() {
     //   return <EditTask />;
     // case 'add-board':
     //   return <AddBoard />;
-    // case 'edit-board':
-    //   return board && <EditBoard board={board} />;
+    case 'edit-board':
+      return board && <EditBoard board={board} />;
     // case 'delete-board':
     //   return board && <DeleteBoard board={board} />;
     // case 'delete-task':
     //   return <DeleteTask />;
     default:
       return (
-        <TemplateModal>
-          <p>Modal does not exist :/</p>
+        <TemplateModal heading="Modal does not exist :/">
           <p>How did you manage this then?</p>
         </TemplateModal>
       );

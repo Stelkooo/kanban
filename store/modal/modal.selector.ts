@@ -1,10 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-const selectModalReducer = (state: RootState) => {
-  console.log(state);
-  return state.modal;
-};
+const selectModalReducer = (state: RootState) => state.modal;
 
 export const selectIsModalOpen = createSelector(
   [selectModalReducer],

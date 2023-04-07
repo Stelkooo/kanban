@@ -1,3 +1,5 @@
+'use client';
+
 import { TColumn } from '@/types/kanban.types';
 
 import Tasks from '../tasks/tasks.component';

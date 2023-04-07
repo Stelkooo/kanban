@@ -29,7 +29,7 @@ export default function Header({ board }: Props) {
         >
           <Image src={AddTask} alt="Click here to add a new task" />
         </Button>
-        <MoreOptions optionsAbout="board" />
+        <MoreOptions optionsAbout="board" board={board} />
       </div>
     </header>
   );

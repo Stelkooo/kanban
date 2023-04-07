@@ -13,45 +13,64 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { id } = req.query;
-
-  const data: Data = await hygraph.request(
-    gql`
-      query Board($id: ID!) {
-        board(where: { id: $id }) {
-          id
-          name
-          columns {
-            board {
+  switch (req.method) {
+    case 'PATCH': {
+      const data: Data = await hygraph.request(
+        gql`
+          mutation PatchBoard($id: ID!, $name: String!) {
+            updateBoard(data: { name: $name }, where: { id: $id }) {
               id
             }
-            id
-            name
-            order
-            tasks {
-              column {
-                id
-              }
+            publishBoard(where: { id: $id }) {
               id
-              title
-              description
-              subtasks {
+            }
+          }
+        `,
+        { id, name: req.body.name }
+      );
+      res.status(200).json(data.board);
+      break;
+    }
+    default: {
+      const data: Data = await hygraph.request(
+        gql`
+          query Board($id: ID!) {
+            board(where: { id: $id }) {
+              id
+              name
+              columns {
+                board {
+                  id
+                }
                 id
-                isCompleted
-                title
-                task {
+                name
+                order
+                tasks {
                   column {
                     id
                   }
                   id
+                  title
+                  description
+                  subtasks {
+                    id
+                    isCompleted
+                    title
+                    task {
+                      column {
+                        id
+                      }
+                      id
+                    }
+                  }
                 }
               }
             }
           }
-        }
-      }
-    `,
-    { id }
-  );
-
-  res.status(200).json(data.board);
+        `,
+        { id }
+      );
+      res.status(200).json(data.board);
+    }
+  }
 }
