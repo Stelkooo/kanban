@@ -31,6 +31,20 @@ export default async function handler(
       res.status(200).json(data.board);
       break;
     }
+    case 'POST': {
+      const create = await hygraph.request(
+        gql`
+          mutation createBoard($name: String!) {
+            createBoard(data: { name: $name }) {
+              id
+            }
+          }
+        `,
+        { name: req.body.name }
+      );
+      console.log(create);
+      break;
+    }
     default: {
       const data: Data = await hygraph.request(
         gql`

@@ -28,8 +28,8 @@ export default function Modal() {
     //   return <AddTask />;
     // case 'edit-task':
     //   return <EditTask />;
-    // case 'add-board':
-    //   return <AddBoard />;
+    case 'add-board':
+      return <AddBoard />;
     case 'edit-board':
       return board && <EditBoard board={board} />;
     // case 'delete-board':

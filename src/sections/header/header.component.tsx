@@ -3,11 +3,10 @@ import Image from 'next/image';
 import { TBoard } from '@/types/kanban.types';
 
 import AddTask from '@/public/assets/icon-add-task-mobile.svg';
-import ChevronDown from '@/public/assets/icon-chevron-down.svg';
-import ChevronUp from '@/public/assets/icon-chevron-up.svg';
 
 import Button from '@/src/components/button/button.component';
 import MoreOptions from '@/src/components/more-options/more-options.component';
+import Heading from './components/heading/heading.component';
 
 type Props = {
   board: TBoard;
@@ -16,12 +15,7 @@ type Props = {
 export default function Header({ board }: Props) {
   return (
     <header className="flex items-center justify-between px-4 py-5">
-      <Button btnStyle="clear">
-        <h1 className="heading-large whitespace-nowrap text-black">
-          {board.name}
-        </h1>
-        <Image src={ChevronDown} alt="" className="" />
-      </Button>
+      <Heading name={board.name} />
       <div className="flex gap-4">
         <Button
           btnStyle="primarySmall"

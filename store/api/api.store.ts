@@ -19,6 +19,16 @@ export const boardApi = createApi({
       },
       providesTags: [{ type: 'Boards', id: 'LIST' }],
     }),
+    createBoard: builder.mutation<string, string>({
+      query: (name) => {
+        return {
+          url: 'board',
+          method: 'POST',
+          body: name,
+        };
+      },
+      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+    }),
     updateBoard: builder.mutation<TBoard, TBoard>({
       query: (board) => {
         return {
