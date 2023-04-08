@@ -4,10 +4,6 @@ import hygraph from '@/lib/graphql-client';
 import { gql } from 'graphql-request';
 import { TBoard, TColumn } from '@/types/kanban.types';
 
-type Data = {
-  board: TBoard;
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

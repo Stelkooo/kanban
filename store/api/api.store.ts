@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TBoard, TColumn } from '@/types/kanban.types';
+import { TBoard, TColumn, TSubtask, TTask } from '@/types/kanban.types';
 
 export const boardApi = createApi({
   reducerPath: 'boardApi',
@@ -58,6 +58,16 @@ export const boardApi = createApi({
             updatedColumns,
             deletedColumns,
           },
+        };
+      },
+      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+    }),
+    createTask: builder.mutation<void, Partial<TTask>>({
+      query: (task) => {
+        return {
+          url: 'task',
+          method: 'POST',
+          body: task,
         };
       },
       invalidatesTags: [{ type: 'Boards', id: 'LIST' }],

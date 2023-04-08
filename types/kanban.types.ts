@@ -21,8 +21,8 @@ export type TTask = {
 };
 
 export type TSubtask = {
-  id: string;
-  title: string;
-  isCompleted: boolean;
-  task: { id: string; column: { id: string } };
+  id?: string;
+  title?: string;
+  isCompleted?: boolean;
+  task?: { id: string; column: { id: string } };
 };

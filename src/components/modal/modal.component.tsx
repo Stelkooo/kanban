@@ -24,8 +24,8 @@ export default function Modal() {
   switch (modalType) {
     // case 'view-task':
     //   return <ViewTask />;
-    // case 'add-task':
-    //   return <AddTask />;
+    case 'add-task':
+      return board && <AddTask board={board} />;
     // case 'edit-task':
     //   return <EditTask />;
     case 'add-board':

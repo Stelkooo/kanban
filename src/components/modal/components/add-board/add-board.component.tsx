@@ -44,7 +44,7 @@ export default function AddBoard() {
         dispatch(setModalToggle());
         router.push(`/${boardData.id}`);
       } catch (error) {
-        console.error(error);
+        // error
       }
     }
   };

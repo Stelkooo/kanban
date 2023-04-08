@@ -1,7 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/router';
+
 import Select, { StylesConfig } from 'react-select';
-import { TColumn } from '@/types/kanban.types';
+
+import { boardApi } from '@/store/api/api.store';
+import { Dispatch, SetStateAction } from 'react';
 
 type OptionType = { value: string; label: string };
 type OptionsType = Array<OptionType>;
@@ -43,22 +47,38 @@ const statusStyles: StylesConfig = {
 };
 
 type Props = {
-  columns: TColumn[];
+  status: string;
+  setStatus: Dispatch<SetStateAction<string>>;
 };
 
-export default function Status({ columns }: Props) {
-  const options: OptionsType = [];
-  columns?.forEach((column) =>
-    options.push({ value: column.id, label: column.name })
+export default function Status({ status, setStatus }: Props) {
+  const router = useRouter();
+
+  const { data: board } = boardApi.endpoints.getBoard.useQueryState(
+    router.query.board as string
   );
+  const options: OptionsType = [];
+
+  if (board) {
+    board.columns.forEach((column) =>
+      options.push({
+        value: column.id as string,
+        label: column.name as string,
+      })
+    );
+  }
+  const onChangeHandler = (option: OptionType) => {
+    setStatus(option.value);
+  };
   return (
     <div>
       <p className="body-medium mb-2 text-medium-grey">Status</p>
       <Select
         options={options}
-        defaultValue={options[0]}
+        defaultValue={options.find((item) => item.value === status)}
         isSearchable={false}
         styles={statusStyles}
+        onChange={(e) => onChangeHandler(e as OptionType)}
       />
     </div>
   );

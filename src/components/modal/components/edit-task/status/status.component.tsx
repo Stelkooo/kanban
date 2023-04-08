@@ -50,7 +50,7 @@ type Props = {
 export default function Status({ columns, task }: Props) {
   const options: OptionsType = [];
   columns?.forEach((column) =>
-    options.push({ value: column.id, label: column.name })
+    options.push({ value: column.id as string, label: column.name as string })
   );
   return (
     <div>
