@@ -32,7 +32,7 @@ export default function Board() {
           <>
             <Sidebar />
             <Header board={data} />
-            <Main board={data} />
+            <Main />
           </>
         )}
       </div>

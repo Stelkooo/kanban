@@ -5,11 +5,11 @@ export type TBoard = {
 };
 
 export type TColumn = {
-  id: string;
-  order: string[];
-  name: string;
-  tasks: TTask[];
-  board: { id: string };
+  id?: string;
+  order?: string[];
+  name?: string;
+  tasks?: TTask[];
+  board?: { id: string };
 };
 
 export type TTask = {

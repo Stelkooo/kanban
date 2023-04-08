@@ -8,6 +8,10 @@ type Data = {
   board: TBoard;
 };
 
+type TCreateBoard = {
+  createBoard: Partial<TBoard>;
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -32,7 +36,7 @@ export default async function handler(
       break;
     }
     case 'POST': {
-      const create = await hygraph.request(
+      const create: TCreateBoard = await hygraph.request(
         gql`
           mutation createBoard($name: String!) {
             createBoard(data: { name: $name }) {
@@ -42,7 +46,7 @@ export default async function handler(
         `,
         { name: req.body.name }
       );
-      console.log(create);
+      res.status(200).json(create.createBoard);
       break;
     }
     default: {

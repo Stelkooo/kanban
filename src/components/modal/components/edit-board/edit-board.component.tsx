@@ -13,7 +13,7 @@ import _ from 'lodash';
 
 import Button from '@/src/components/button/button.component';
 import Modal from '../template-modal/template-modal.component';
-import Columns from './columns/columns.component';
+import AddEditList from '../add-edit-list/add-edit-list.component';
 
 type Props = { board: TBoard };
 
@@ -65,7 +65,12 @@ export default function EditBoard({ board }: Props) {
           onChange={(e) => setName(e.currentTarget.value)}
         />
       </label>
-      <Columns columns={columns} setColumns={setColumns} />
+      <AddEditList
+        list={columns}
+        setList={setColumns}
+        listType="column"
+        objNameKey="name"
+      />
       <Button btnStyle="primarySmall" onClickFunc={() => onClickHandler()}>
         <p className="body-medium">Save Changes</p>
       </Button>
