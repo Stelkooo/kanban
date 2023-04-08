@@ -8,18 +8,19 @@ import { TColumn } from '@/types/kanban.types';
 import Cross from '@/public/assets/icon-cross.svg';
 import Button from '@/src/components/button/button.component';
 
-type Props = {
+export type TListObj = {
   list: Array<Partial<TColumn>>;
   setList: Dispatch<SetStateAction<Array<Partial<TColumn>>>>;
   listType: 'column' | 'subtask';
   objNameKey: string;
 };
 
+type Props = {
+  listObj: TListObj;
+};
+
 export default function AddEditList({
-  list,
-  setList,
-  listType,
-  objNameKey,
+  listObj: { list, listType, objNameKey, setList },
 }: Props) {
   const addHandler = () => {
     setList([...list, { [objNameKey]: '' }]);

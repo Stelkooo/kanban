@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 
+import { useAppDispatch } from '@/store/hooks';
+import { setModalToggle } from '@/store/modal/modal.reducer';
+
 import { TBoard, TSubtask } from '@/types/kanban.types';
 
 import { boardApi } from '@/store/api/api.store';
@@ -16,6 +19,8 @@ type Props = {
 };
 
 export default function AddTask({ board }: Props) {
+  const dispatch = useAppDispatch();
+
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [subtasks, setSubtasks] = useState<Array<Partial<TSubtask>>>([
@@ -24,11 +29,17 @@ export default function AddTask({ board }: Props) {
   ]);
   const [status, setStatus] = useState<string>(board.columns[0].id as string);
 
-  const [createTask] = boardApi.useCreateTaskMutation();
+  const [createTask, { isLoading }] = boardApi.useCreateTaskMutation();
 
-  const onClickHandler = () => {
+  const onClickHandler = async () => {
     if (title && subtasks.every((subtask) => subtask.title) && status)
-      createTask({ column: { id: status }, description, title, subtasks });
+      await createTask({
+        column: { id: status },
+        description,
+        title,
+        subtasks,
+      });
+    dispatch(setModalToggle());
   };
   return (
     <Modal heading="Add New Task">
@@ -57,13 +68,19 @@ export default function AddTask({ board }: Props) {
         />
       </label>
       <AddEditList
-        list={subtasks}
-        setList={setSubtasks}
-        listType="subtask"
-        objNameKey="title"
+        listObj={{
+          list: subtasks,
+          setList: setSubtasks,
+          listType: 'subtask',
+          objNameKey: 'title',
+        }}
       />
       <Status status={status} setStatus={setStatus} />
-      <Button btnStyle="primarySmall" onClickFunc={() => onClickHandler()}>
+      <Button
+        btnStyle="primarySmall"
+        onClickFunc={() => onClickHandler()}
+        isLoading={isLoading}
+      >
         <p className="body-medium">Create Task</p>
       </Button>
     </Modal>

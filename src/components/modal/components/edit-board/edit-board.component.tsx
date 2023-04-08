@@ -11,9 +11,7 @@ import { boardApi } from '@/store/api/api.store';
 
 import _ from 'lodash';
 
-import Button from '@/src/components/button/button.component';
-import Modal from '../template-modal/template-modal.component';
-import AddEditList from '../add-edit-list/add-edit-list.component';
+import BoardModal from '../board-modal/board-modal.component';
 
 type Props = { board: TBoard };
 
@@ -25,8 +23,10 @@ export default function EditBoard({ board }: Props) {
     board.columns
   );
 
-  const [updateBoard] = boardApi.useUpdateBoardMutation();
-  const [updateBoardColumns] = boardApi.useUpdateBoardColumnsMutation();
+  const [updateBoard, { isLoading: isBoardLoading }] =
+    boardApi.useUpdateBoardMutation();
+  const [updateBoardColumns, { isLoading: isColumnsLoading }] =
+    boardApi.useUpdateBoardColumnsMutation();
 
   const onClickHandler = () => {
     if (name !== board.name) updateBoard({ ...board, name });
@@ -53,27 +53,17 @@ export default function EditBoard({ board }: Props) {
     dispatch(setModalToggle());
   };
   return (
-    <Modal heading="Edit Board">
-      <label htmlFor="title" className="grid gap-y-2">
-        <p className="body-medium text-medium-grey">Name</p>
-        <input
-          type="text"
-          id="title"
-          className="body-large rounded-[4px] border border-lines-light px-4 py-2"
-          placeholder="e.g. Take coffee break"
-          defaultValue={name}
-          onChange={(e) => setName(e.currentTarget.value)}
-        />
-      </label>
-      <AddEditList
-        list={columns}
-        setList={setColumns}
-        listType="column"
-        objNameKey="name"
-      />
-      <Button btnStyle="primarySmall" onClickFunc={() => onClickHandler()}>
-        <p className="body-medium">Save Changes</p>
-      </Button>
-    </Modal>
+    <BoardModal
+      addOrEdit="edit"
+      isLoading={isBoardLoading || isColumnsLoading}
+      listObj={{
+        list: columns,
+        listType: 'column',
+        objNameKey: 'name',
+        setList: setColumns,
+      }}
+      nameObj={{ name, setName }}
+      onClickFunc={() => onClickHandler()}
+    />
   );
 }

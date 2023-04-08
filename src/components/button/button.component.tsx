@@ -1,3 +1,5 @@
+import { BeatLoader } from 'react-spinners';
+
 type Props = {
   children: JSX.Element | JSX.Element[];
   btnStyle:
@@ -11,6 +13,7 @@ type Props = {
   isDisabled?: boolean;
   isSubmit?: boolean;
   onClickFunc?: <T>(value?: T) => void;
+  isLoading?: boolean;
 };
 
 export default function Button({
@@ -19,6 +22,7 @@ export default function Button({
   isDisabled,
   isSubmit,
   onClickFunc,
+  isLoading,
 }: Props) {
   // base button style
   const classNames: string[] = [
@@ -56,7 +60,11 @@ export default function Button({
       className={classNames.join(' ')}
       onClick={onClickFunc}
     >
-      {children}
+      {isLoading ? (
+        <BeatLoader size={11} color="white" aria-label="Loading Spinner" />
+      ) : (
+        children
+      )}
     </button>
   );
 }
@@ -65,4 +73,5 @@ Button.defaultProps = {
   isDisabled: false,
   isSubmit: false,
   onClickFunc: null,
+  isLoading: false,
 };
