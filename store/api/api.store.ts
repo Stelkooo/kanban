@@ -98,6 +98,16 @@ export const boardApi = createApi({
       },
       invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
     }),
+    updateSubtask: builder.mutation<void, TSubtask>({
+      query: (subtask) => {
+        return {
+          url: 'subtask',
+          method: 'PATCH',
+          body: subtask,
+        };
+      },
+      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+    }),
   }),
 });
 

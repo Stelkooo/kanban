@@ -1,3 +1,5 @@
+'use client';
+
 import { TSubtask } from '@/types/kanban.types';
 import SubTask from '../subtask/subtask.component';
 

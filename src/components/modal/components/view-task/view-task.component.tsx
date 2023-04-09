@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useAppDispatch } from '@/store/hooks';
 import { setModalToggle } from '@/store/modal/modal.reducer';

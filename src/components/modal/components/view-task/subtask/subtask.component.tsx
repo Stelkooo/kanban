@@ -1,10 +1,20 @@
+'use client';
+
+import { boardApi } from '@/store/api/api.store';
+
 import { TSubtask } from '@/types/kanban.types';
+import { ChangeEvent } from 'react';
 
 type Props = {
   subtask: TSubtask;
 };
 
 export default function SubTask({ subtask }: Props) {
+  const [updateSubtask] = boardApi.useUpdateSubtaskMutation();
+
+  const onClickHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    await updateSubtask({ ...subtask, isCompleted: e.currentTarget.checked });
+  };
   return (
     <label
       htmlFor={subtask.id}
@@ -15,6 +25,7 @@ export default function SubTask({ subtask }: Props) {
         defaultChecked={subtask.isCompleted}
         id={subtask.id}
         className="peer sr-only"
+        onChange={(e) => onClickHandler(e)}
       />
       <span className="h-4 w-4 rounded-sm border border-medium-grey bg-white after:h-full after:w-full after:bg-[url('/assets/icon-check.svg')] after:bg-center after:bg-no-repeat peer-checked:border-none peer-checked:bg-purple peer-checked:after:block" />
       <p className="body-medium peer-checked:text-medium-grey peer-checked:line-through">
