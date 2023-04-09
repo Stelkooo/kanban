@@ -37,9 +37,13 @@ export const modalSlice = createSlice({
     setBoard: (state, action: PayloadAction<TBoard>) => {
       return { ...state, board: action.payload };
     },
+    setTask: (state, action: PayloadAction<TTask>) => {
+      return { ...state, task: action.payload };
+    },
   },
 });
 
-export const { setModalToggle, setModalType, setBoard } = modalSlice.actions;
+export const { setModalToggle, setModalType, setBoard, setTask } =
+  modalSlice.actions;
 
 export const modalReducer = modalSlice.reducer;

@@ -20,51 +20,40 @@ export default async function handler(
   switch (req.method) {
     case 'PATCH': {
       const { task, newColumnId }: PatchTask = req.body;
-      const patchTask = await hygraph.request(
+      const data = await hygraph.request(
         gql`
           mutation PatchTask(
             $id: ID!
             $title: String!
             $description: String!
             $columnId: ID!
+            $newColumnId: ID!
           ) {
             updateTask(
               data: {
                 title: $title
                 description: $description
-                ${
-                  newColumnId !== task.column.id
-                    ? `column: { connect: { id: "${newColumnId}" } }`
-                    : ''
-                }
+                column: { connect: { id: $newColumnId } }
               }
               where: { id: $id }
             ) {
               id
             }
-            ${
-              newColumnId !== task.column.id
-                ? `updateColumn(
+            updateColumn(
               data: {
                 tasks: {
                   connect: { where: { id: $id }, position: { start: true } }
                 }
               }
-              where: { id: "${newColumnId}" }
+              where: { id: $newColumnId }
             ) {
               id
-            }`
-                : ''
             }
             publishTask(where: { id: $id }) {
               id
             }
             publishManyColumns(
-              where: { OR: [{ id: $columnId }${
-                newColumnId !== task.column.id
-                  ? `, { id: "${newColumnId}" }`
-                  : ''
-              }] }
+              where: { OR: [{ id: $columnId }, { id: $newColumnId }] }
             ) {
               count
             }
@@ -75,9 +64,10 @@ export default async function handler(
           title: task.title,
           description: task.description,
           columnId: task.column.id,
+          newColumnId,
         }
       );
-      res.status(200).json(patchTask);
+      res.status(200).json(data);
       break;
     }
     case 'POST': {

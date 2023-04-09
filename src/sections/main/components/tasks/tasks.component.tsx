@@ -1,3 +1,5 @@
+'use client';
+
 import { TTask } from '@/types/kanban.types';
 import Task from '../task/task.component';
 

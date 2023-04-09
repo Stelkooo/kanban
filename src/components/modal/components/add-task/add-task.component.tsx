@@ -11,8 +11,8 @@ import { boardApi } from '@/store/api/api.store';
 
 import Button from '@/src/components/button/button.component';
 import Modal from '../template-modal/template-modal.component';
-import Status from './status/status.component';
-import AddEditList from '../add-edit-list/add-edit-list.component';
+import Status from '../status/status.component';
+import AddEditSubtasks from '../add-edit-subtasks/add-edit-subtasks.component';
 
 type Props = {
   board: TBoard;
@@ -67,14 +67,7 @@ export default function AddTask({ board }: Props) {
           onChange={(e) => setDescription(e.currentTarget.value)}
         />
       </label>
-      <AddEditList
-        listObj={{
-          list: subtasks,
-          setList: setSubtasks,
-          listType: 'subtask',
-          objNameKey: 'title',
-        }}
-      />
+      <AddEditSubtasks list={subtasks} setList={setSubtasks} />
       <Status status={status} setStatus={setStatus} />
       <Button
         btnStyle="primarySmall"

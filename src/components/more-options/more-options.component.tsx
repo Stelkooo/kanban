@@ -12,16 +12,17 @@ import {
   setModalType,
 } from '@/store/modal/modal.reducer';
 
-import { TBoard } from '@/types/kanban.types';
+import { TBoard, TTask } from '@/types/kanban.types';
 
 import Button from '@/src/components/button/button.component';
 
 type Props = {
   optionsAbout: 'task' | 'board';
   board?: TBoard;
+  task?: TTask;
 };
 
-export default function MoreOptions({ optionsAbout, board }: Props) {
+export default function MoreOptions({ optionsAbout, board, task }: Props) {
   const dispatch = useAppDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -82,4 +83,5 @@ export default function MoreOptions({ optionsAbout, board }: Props) {
 
 MoreOptions.defaultProps = {
   board: null,
+  task: null,
 };

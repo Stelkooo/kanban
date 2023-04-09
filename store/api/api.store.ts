@@ -72,6 +72,32 @@ export const boardApi = createApi({
       },
       invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
     }),
+    updateTask: builder.mutation<
+      void,
+      { task: Partial<TTask>; newColumnId: string }
+    >({
+      query: ({ task, newColumnId }) => {
+        return {
+          url: 'task',
+          method: 'PATCH',
+          body: { task, newColumnId },
+        };
+      },
+      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+    }),
+    updateTaskStatus: builder.mutation<
+      void,
+      { task: TTask; newColumnId: string }
+    >({
+      query: ({ task, newColumnId }) => {
+        return {
+          url: 'task-status',
+          method: 'PATCH',
+          body: { task, newColumnId },
+        };
+      },
+      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+    }),
   }),
 });
 

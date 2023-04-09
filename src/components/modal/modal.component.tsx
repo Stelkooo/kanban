@@ -22,12 +22,12 @@ export default function Modal() {
   const task = useAppSelector(selectTask);
 
   switch (modalType) {
-    // case 'view-task':
-    //   return <ViewTask />;
+    case 'view-task':
+      return task && <ViewTask task={task} />;
     case 'add-task':
       return board && <AddTask board={board} />;
-    // case 'edit-task':
-    //   return <EditTask />;
+    case 'edit-task':
+      return task && <EditTask task={task} />;
     case 'add-board':
       return <AddBoard />;
     case 'edit-board':
