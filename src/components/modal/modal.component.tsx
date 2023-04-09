@@ -1,11 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/router';
+
 import { useAppSelector } from '@/store/hooks';
-import {
-  selectModalType,
-  selectBoard,
-  selectTask,
-} from '@/store/modal/modal.selector';
+import { selectModalType, selectTask } from '@/store/modal/modal.selector';
+
+import { boardApi } from '@/store/api/api.store';
 
 import ViewTask from './components/view-task/view-task.component';
 import AddTask from './components/add-task/add-task.component';
@@ -17,30 +17,25 @@ import DeleteBoard from './components/delete-board/delete-board.component';
 import DeleteTask from './components/delete-task/delete-task.component';
 
 export default function Modal() {
+  const router = useRouter();
+
   const modalType = useAppSelector(selectModalType);
-  const board = useAppSelector(selectBoard);
+  const { data: board } = boardApi.endpoints.getBoard.useQueryState(
+    router.query.board as string
+  );
   const task = useAppSelector(selectTask);
 
-  switch (modalType) {
-    case 'view-task':
-      return task && <ViewTask task={task} />;
-    case 'add-task':
-      return board && <AddTask board={board} />;
-    case 'edit-task':
-      return task && <EditTask task={task} />;
-    case 'add-board':
-      return <AddBoard />;
-    case 'edit-board':
-      return board && <EditBoard board={board} />;
-    // case 'delete-board':
-    //   return board && <DeleteBoard board={board} />;
-    // case 'delete-task':
-    //   return <DeleteTask />;
-    default:
-      return (
-        <TemplateModal heading="Modal does not exist :/">
-          <p>How did you manage this then?</p>
-        </TemplateModal>
-      );
-  }
+  if (modalType === 'view-task' && task) return <ViewTask task={task} />;
+  if (modalType === 'edit-task' && task) return <EditTask task={task} />;
+  if (modalType === 'add-task' && board) return <AddTask board={board} />;
+  if (modalType === 'add-board') return <AddBoard />;
+  if (modalType === 'edit-board' && board) return <EditBoard board={board} />;
+  if (modalType === 'delete-board' && board)
+    return <DeleteBoard board={board} />;
+  if (modalType === 'delete-task' && task) return <DeleteTask task={task} />;
+  return (
+    <TemplateModal heading="Modal does not exist :/">
+      <p>How did you manage this then?</p>
+    </TemplateModal>
+  );
 }

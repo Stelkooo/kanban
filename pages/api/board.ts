@@ -49,6 +49,23 @@ export default async function handler(
       res.status(200).json(create.createBoard);
       break;
     }
+    case 'DELETE': {
+      const board: TBoard = req.body;
+      await hygraph.request(
+        gql`
+          mutation DeleteBoard($id: ID!) {
+            deleteBoard(where: { id: $id }) {
+              id
+            }
+          }
+        `,
+        {
+          id: board.id,
+        }
+      );
+      res.status(200).json('deleted');
+      break;
+    }
     default: {
       const data: Data = await hygraph.request(
         gql`

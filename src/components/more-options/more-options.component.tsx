@@ -12,17 +12,16 @@ import {
   setModalType,
 } from '@/store/modal/modal.reducer';
 
-import { TBoard, TTask } from '@/types/kanban.types';
+import { TBoard } from '@/types/kanban.types';
 
 import Button from '@/src/components/button/button.component';
 
 type Props = {
   optionsAbout: 'task' | 'board';
   board?: TBoard;
-  task?: TTask;
 };
 
-export default function MoreOptions({ optionsAbout, board, task }: Props) {
+export default function MoreOptions({ optionsAbout, board }: Props) {
   const dispatch = useAppDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -39,13 +38,13 @@ export default function MoreOptions({ optionsAbout, board, task }: Props) {
       dispatch(setModalToggle());
     }
   };
-  //   const deleteHandler = () => {
-  //     setIsPopupOpen(!isPopupOpen);
-  //     dispatch(setModalType(`delete-${optionsAbout}`));
-  //     if (optionsAbout === 'board') {
-  //       dispatch(setModalToggle());
-  //     }
-  //   };
+  const deleteHandler = () => {
+    setIsPopupOpen(!isPopupOpen);
+    dispatch(setModalType(`delete-${optionsAbout}`));
+    if (optionsAbout === 'board') {
+      dispatch(setModalToggle());
+    }
+  };
   return (
     <div className="relative grid place-content-center">
       <Button btnStyle="clear" onClickFunc={() => popupToggleHandler()}>
@@ -69,7 +68,7 @@ export default function MoreOptions({ optionsAbout, board, task }: Props) {
           <button
             type="button"
             className="h-6 w-40 text-left"
-            // onClick={() => deleteHandler()}
+            onClick={() => deleteHandler()}
           >
             <p className="body-large capitalize text-red">
               Delete {optionsAbout}
@@ -83,5 +82,4 @@ export default function MoreOptions({ optionsAbout, board, task }: Props) {
 
 MoreOptions.defaultProps = {
   board: null,
-  task: null,
 };

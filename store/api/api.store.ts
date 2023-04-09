@@ -39,6 +39,16 @@ export const boardApi = createApi({
       },
       invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
     }),
+    deleteBoard: builder.mutation<void, TBoard>({
+      query: (board) => {
+        return {
+          url: 'board',
+          method: 'DELETE',
+          body: board,
+        };
+      },
+      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+    }),
     updateBoardColumns: builder.mutation<
       void,
       {
@@ -94,6 +104,16 @@ export const boardApi = createApi({
           url: 'task-status',
           method: 'PATCH',
           body: { task, newColumnId },
+        };
+      },
+      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+    }),
+    deleteTask: builder.mutation<void, TTask>({
+      query: (task) => {
+        return {
+          url: 'task',
+          method: 'DELETE',
+          body: task,
         };
       },
       invalidatesTags: [{ type: 'Boards', id: 'LIST' }],

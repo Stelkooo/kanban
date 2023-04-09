@@ -146,6 +146,27 @@ export default async function handler(
       res.status(200).json(publishTask);
       break;
     }
+    case 'DELETE': {
+      const task: TTask = req.body;
+      await hygraph.request(
+        gql`
+          mutation DeleteTask($id: ID!, $columnId: ID!) {
+            deleteTask(where: { id: $id }) {
+              id
+            }
+            publishColumn(where: { id: $columnId }) {
+              id
+            }
+          }
+        `,
+        {
+          id: task.id,
+          columnId: task.column?.id,
+        }
+      );
+      res.status(200).json('deleted');
+      break;
+    }
     default: {
       res.status(200).json(':/');
     }
