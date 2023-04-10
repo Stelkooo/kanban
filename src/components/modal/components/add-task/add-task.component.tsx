@@ -48,7 +48,7 @@ export default function AddTask({ board }: Props) {
         <input
           type="text"
           id="title"
-          className="body-large rounded-[4px] border border-lines-light px-4 py-2"
+          className="body-large rounded-[4px] border border-lines-light px-4 py-2 dark:border-lines-dark dark:bg-dark-grey dark:text-white"
           placeholder="e.g. Take coffee break"
           defaultValue={title}
           onChange={(e) => setTitle(e.currentTarget.value)}
@@ -59,7 +59,7 @@ export default function AddTask({ board }: Props) {
         <textarea
           rows={4}
           id="description"
-          className="body-large resize-none rounded-[4px] border border-lines-light px-4 py-2"
+          className="body-large resize-none rounded-[4px] border border-lines-light px-4 py-2 dark:border-lines-dark dark:bg-dark-grey dark:text-white"
           placeholder="e.g. It’s always good to take a break. This 
           15 minute break will  recharge the batteries 
           a little."

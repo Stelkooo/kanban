@@ -31,7 +31,7 @@ export default function Main() {
   };
   return (
     <main
-      className={`relative col-span-2 flex gap-6 overflow-auto bg-light-grey px-4 py-6 ${
+      className={`relative col-span-2 flex gap-6 overflow-auto bg-light-grey px-4 py-6 dark:bg-very-dark-grey ${
         isSidebarOpen ? 'md:col-span-1' : 'md:col-span-2'
       }`}
     >

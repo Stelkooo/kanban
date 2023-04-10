@@ -10,7 +10,7 @@ type Props = {
 
 export default function Header({ board }: Props) {
   return (
-    <header className="flex items-center justify-between px-4 py-5 md:border-b md:border-lines-light">
+    <header className="flex items-center justify-between px-4 py-5 dark:bg-dark-grey md:border-b md:border-lines-light dark:md:border-lines-dark">
       <Heading name={board.name} />
       <div className="flex gap-4">
         <AddTaskButton board={board} />

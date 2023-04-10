@@ -18,7 +18,7 @@ export default function SubTask({ subtask }: Props) {
   return (
     <label
       htmlFor={subtask.id}
-      className="flex cursor-pointer items-center gap-4 rounded-[4px] bg-light-grey p-3"
+      className="flex cursor-pointer items-center gap-4 rounded-[4px] bg-light-grey p-3 dark:bg-very-dark-grey"
     >
       <input
         type="checkbox"
@@ -28,7 +28,7 @@ export default function SubTask({ subtask }: Props) {
         onChange={(e) => onClickHandler(e)}
       />
       <span className="h-4 min-h-[1rem] w-4 min-w-[1rem] rounded-sm border border-medium-grey bg-white after:h-full after:w-full after:bg-[url('/assets/icon-check.svg')] after:bg-center after:bg-no-repeat peer-checked:border-none peer-checked:bg-purple peer-checked:after:block" />
-      <p className="body-medium peer-checked:text-medium-grey peer-checked:line-through">
+      <p className="body-medium peer-checked:text-medium-grey peer-checked:line-through dark:text-white">
         {subtask.title}
       </p>
     </label>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/router';
+import { useTheme } from 'next-themes';
 
 import Select, { StylesConfig } from 'react-select';
 
@@ -10,42 +11,6 @@ import { Dispatch, SetStateAction } from 'react';
 type OptionType = { value: string; label: string };
 type OptionsType = Array<OptionType>;
 
-const statusStyles: StylesConfig = {
-  control: (base, { isFocused }) => ({
-    ...base,
-    backgroundColor: 'transparent',
-    border: isFocused ? '1px solid #635fc7' : '1px solid #E4EBFA',
-    boxShadow: 'none',
-    fontSize: 'calc((13 / 16) * 1rem)',
-    lineHeight: 'calc((23 / 16) * 1rem)',
-    cursor: 'pointer',
-  }),
-  menu: (base) => ({
-    ...base,
-    backgroundColor: '#ffffff',
-  }),
-  option: (base) => ({
-    ...base,
-    color: '#828FA3',
-    background: 'transparent',
-    fontSize: 'calc((13 / 16) * 1rem)',
-    lineHeight: 'calc((23 / 16) * 1rem)',
-    cursor: 'pointer',
-  }),
-  singleValue: (base) => ({
-    ...base,
-    color: '#000112',
-  }),
-  dropdownIndicator: (base) => ({
-    ...base,
-    color: '#635fc7',
-  }),
-  indicatorSeparator: (base) => ({
-    ...base,
-    backgroundColor: '#E4EBFA',
-  }),
-};
-
 type Props = {
   status: string;
   setStatus: Dispatch<SetStateAction<string>>;
@@ -53,6 +18,9 @@ type Props = {
 
 export default function Status({ status, setStatus }: Props) {
   const router = useRouter();
+
+  const { systemTheme, theme } = useTheme();
+  const currentTheme = theme === 'system' ? systemTheme : theme;
 
   const { data: board } = boardApi.endpoints.getBoard.useQueryState(
     router.query.board as string
@@ -70,9 +38,49 @@ export default function Status({ status, setStatus }: Props) {
   const onChangeHandler = (option: OptionType) => {
     setStatus(option.value);
   };
+
+  const statusStyles: StylesConfig = {
+    control: (base, { isFocused }) => ({
+      ...base,
+      backgroundColor: 'transparent',
+      border: isFocused
+        ? '1px solid #635fc7'
+        : `1px solid ${currentTheme === 'dark' ? '#3E3F4E' : '#E4EBFA'}`,
+      boxShadow: 'none',
+      fontSize: 'calc((13 / 16) * 1rem)',
+      lineHeight: 'calc((23 / 16) * 1rem)',
+      cursor: 'pointer',
+    }),
+    menu: (base) => ({
+      ...base,
+      backgroundColor: `${currentTheme === 'dark' ? '#20212C' : '#ffffff'}`,
+    }),
+    option: (base) => ({
+      ...base,
+      color: '#828FA3',
+      background: 'transparent',
+      fontSize: 'calc((13 / 16) * 1rem)',
+      lineHeight: 'calc((23 / 16) * 1rem)',
+      cursor: 'pointer',
+    }),
+    singleValue: (base) => ({
+      ...base,
+      color: `${currentTheme === 'dark' ? '#ffffff' : '#000112'}`,
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: '#635fc7',
+    }),
+    indicatorSeparator: (base) => ({
+      ...base,
+      backgroundColor: `${currentTheme === 'dark' ? '#3E3F4E' : '#E4EBFA'}`,
+    }),
+  };
   return (
     <div>
-      <p className="body-medium mb-2 text-medium-grey">Status</p>
+      <p className="body-medium mb-2 text-medium-grey dark:text-white">
+        Status
+      </p>
       <Select
         options={options}
         defaultValue={options.find((item) => item.value === status)}

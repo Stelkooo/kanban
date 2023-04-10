@@ -14,7 +14,7 @@ export default function Subtasks({ subtasks }: Props) {
   ).length;
   return (
     <div>
-      <h4 className="body-medium mb-4 text-medium-grey">
+      <h4 className="body-medium mb-4 text-medium-grey dark:text-white">
         Subtasks ({completedSubtasks} of {subtasksLength})
       </h4>
       <div className="grid gap-y-2">

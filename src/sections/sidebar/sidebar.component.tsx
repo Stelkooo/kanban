@@ -1,6 +1,10 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect } from 'react';
+import { useMediaQuery } from 'usehooks-ts';
+
+import { useTheme } from 'next-themes';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setSidebarToggle } from '@/store/sidebar/sidebar.reducer';
@@ -13,17 +17,27 @@ export default function Sidebar() {
   const dispatch = useAppDispatch();
 
   const isMenuOpen = useAppSelector(selectIsSidebarOpen);
+
+  const { systemTheme, theme } = useTheme();
+  const currentTheme = theme === 'system' ? systemTheme : theme;
+
+  const isTabletSize = useMediaQuery('(min-width: 768px)');
+  useEffect(() => {
+    if (!isTabletSize && isMenuOpen) dispatch(setSidebarToggle());
+  }, [isTabletSize, isMenuOpen, dispatch]);
   return (
     <div
       className={`${
         isMenuOpen ? 'md:row-span-2 md:w-[260px] md:pb-8' : 'md:row-span-1'
-      } flex w-max flex-col justify-center md:justify-start md:gap-[54px] md:border-b md:border-r md:border-lines-light md:pr-5 md:pt-5`}
+      } flex w-max flex-col justify-center dark:bg-dark-grey md:justify-start md:gap-[54px] md:border-b md:border-r md:border-lines-light md:pr-5 md:pt-5 dark:md:border-lines-dark`}
     >
       <div className="pl-4 md:pl-3.5">
         <picture>
           <source
             media="(min-width:768px)"
-            srcSet="/assets/logo-dark.svg"
+            srcSet={`/assets/logo-${
+              currentTheme === 'dark' ? 'light' : 'dark'
+            }.svg`}
             width={152}
           />
           <Image src={Logo} alt="Kanban Logo" />
@@ -36,8 +50,8 @@ export default function Sidebar() {
       </div>
       <button
         type="button"
-        className={`absolute bottom-8 z-50 rounded-r-full bg-purple p-4.5 ${
-          isMenuOpen ? 'hidden' : 'block'
+        className={`absolute bottom-8 z-50 hidden rounded-r-full bg-purple p-4.5 ${
+          isMenuOpen ? 'md:hidden' : 'md:block'
         }`}
         onClick={() => dispatch(setSidebarToggle())}
       >

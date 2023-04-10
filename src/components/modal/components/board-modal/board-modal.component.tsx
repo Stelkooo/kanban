@@ -32,7 +32,7 @@ export default function BoardModal({
         <input
           type="text"
           id="name"
-          className="body-large rounded-[4px] border border-lines-light px-4 py-2"
+          className="body-large rounded-[4px] border border-lines-light px-4 py-2 dark:border-lines-dark dark:bg-dark-grey dark:text-white"
           placeholder="e.g. Take coffee break"
           defaultValue={nameObj.name}
           onChange={(e) => nameObj.setName(e.currentTarget.value)}

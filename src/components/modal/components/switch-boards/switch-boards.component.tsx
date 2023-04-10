@@ -11,7 +11,7 @@ export default function SwitchBoards({ setIsMenuOpen }: Props) {
   return (
     <>
       <BackDrop marginTop="mt-[4.5rem]" onClickFunc={setIsMenuOpen} />
-      <div className="fixed left-1/2 top-[5.5rem] z-50 grid w-[264px] -translate-x-1/2 gap-y-4 rounded-lg bg-white py-4">
+      <div className="fixed left-1/2 top-[5.5rem] z-50 grid w-[264px] -translate-x-1/2 gap-y-4 rounded-lg bg-white py-4 dark:bg-dark-grey">
         <SideBarMenu setIsMenuOpen={setIsMenuOpen} />
       </div>
     </>
