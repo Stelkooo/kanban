@@ -23,7 +23,7 @@ export default function TemplateModal({
   return (
     <>
       <BackDrop onClickFunc={() => dispatch(setModalToggle())} />
-      <div className="fixed left-1/2 top-1/2 z-50 flex w-[343px] -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-md bg-white p-6">
+      <div className="fixed left-1/2 top-1/2 z-50 flex w-[343px] -translate-x-1/2  -translate-y-1/2 flex-col gap-6 rounded-md bg-white p-6 md:w-[480px]">
         <div className="flex justify-between gap-4">
           <h3
             className={`heading-large ${isDanger ? 'text-red' : 'text-black'}`}

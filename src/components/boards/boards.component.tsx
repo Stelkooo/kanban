@@ -21,11 +21,11 @@ export default function Boards({ boards, setIsMenuOpen }: Props) {
     router.query.board as string
   );
   const onClickHandler = (id: string) => {
-    if (setIsMenuOpen !== undefined) setIsMenuOpen();
+    if (setIsMenuOpen !== undefined && setIsMenuOpen !== null) setIsMenuOpen();
     router.push(id);
   };
   const onCreateHandler = () => {
-    if (setIsMenuOpen !== undefined) setIsMenuOpen();
+    if (setIsMenuOpen !== undefined && setIsMenuOpen !== null) setIsMenuOpen();
     dispatch(setModalType('add-board'));
     dispatch(setModalToggle());
   };

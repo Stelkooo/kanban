@@ -2,6 +2,9 @@
 
 import Image from 'next/image';
 
+import { useAppDispatch } from '@/store/hooks';
+import { setSidebarToggle } from '@/store/sidebar/sidebar.reducer';
+
 import { boardApi } from '@/store/api/api.store';
 
 import Sun from '@/public/assets/icon-light-theme.svg';
@@ -15,14 +18,13 @@ type Props = {
 };
 
 export default function SideBarMenu({ setIsMenuOpen }: Props) {
+  const dispatch = useAppDispatch();
   const { data } = boardApi.useGetAllQuery();
   return (
     <>
-      <h2 className="heading-small px-6 md:pr-0">
-        All Boards ({data?.length})
-      </h2>
+      <h2 className="heading-small px-6">All Boards ({data?.length})</h2>
       {data && <Boards boards={data} setIsMenuOpen={setIsMenuOpen} />}
-      <div className="mt-auto">
+      <div className="md:mt-auto">
         <div className="mx-4 flex items-center justify-center gap-6 rounded-md bg-light-grey py-3.5 md:mr-0">
           <Image src={Sun} alt="Light Theme Icon" />
           <label htmlFor="themeSwitcher" className="relative block h-5 w-10">
@@ -31,8 +33,13 @@ export default function SideBarMenu({ setIsMenuOpen }: Props) {
           </label>
           <Image src={Moon} alt="Dark Theme Icon" />
         </div>
-        <div className="hidden">
-          <BoardButton btnStyle="selected" text="Hide Sidebar" svg="hide" />
+        <div className="hidden md:block">
+          <BoardButton
+            btnStyle="default"
+            text="Hide Sidebar"
+            svg="hide"
+            onClickFunc={() => dispatch(setSidebarToggle())}
+          />
         </div>
       </div>
     </>

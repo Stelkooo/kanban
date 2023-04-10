@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setModalType, setModalToggle } from '@/store/modal/modal.reducer';
 import { selectIsModalOpen } from '@/store/modal/modal.selector';
+import selectIsSidebarOpen from '@/store/sidebar/sidebar.selector';
 
 import _ from 'lodash';
 
@@ -22,13 +23,18 @@ export default function Main() {
   );
 
   const isModalOpen = useAppSelector(selectIsModalOpen);
+  const isSidebarOpen = useAppSelector(selectIsSidebarOpen);
 
   const onClickHandler = () => {
     dispatch(setModalType('edit-board'));
     dispatch(setModalToggle());
   };
   return (
-    <main className="relative col-span-2 flex gap-6 overflow-auto bg-light-grey px-4 py-6 md:col-span-1">
+    <main
+      className={`relative col-span-2 flex gap-6 overflow-auto bg-light-grey px-4 py-6 ${
+        isSidebarOpen ? 'md:col-span-1' : 'md:col-span-2'
+      }`}
+    >
       {_.isEmpty(data?.columns) ? (
         <div className="absolute top-1/2 -translate-y-1/2 px-4 text-center">
           <h2 className="heading-large mb-6 text-medium-grey">

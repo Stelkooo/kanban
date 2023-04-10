@@ -32,7 +32,7 @@ export default function BoardButton({
       type="button"
       className={`${
         btnStyle === 'selected' ? 'bg-purple' : ''
-      } flex cursor-pointer items-center gap-3 rounded-r-full py-[15px] pl-6`}
+      } flex w-full cursor-pointer items-center gap-3 rounded-r-full py-[15px] pl-6`}
       onClick={onClickFunc}
     >
       {svg === 'hide' ? (
