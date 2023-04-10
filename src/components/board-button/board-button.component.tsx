@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 type TBtnStyle = 'selected' | 'default' | 'create';
@@ -19,8 +21,6 @@ export default function BoardButton({
     switch (style) {
       case 'selected':
         return `${el}-white`;
-      case 'default':
-        return `${el}-medium-grey`;
       case 'create':
         return `${el}-purple`;
       default:

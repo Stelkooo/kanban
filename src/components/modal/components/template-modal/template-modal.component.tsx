@@ -10,12 +10,14 @@ type Props = {
   children: JSX.Element | JSX.Element[];
   heading: string;
   showMoreOptions?: boolean;
+  isDanger?: boolean;
 };
 
 export default function TemplateModal({
   children,
   heading,
   showMoreOptions,
+  isDanger,
 }: Props) {
   const dispatch = useAppDispatch();
   return (
@@ -23,7 +25,11 @@ export default function TemplateModal({
       <BackDrop onClickFunc={() => dispatch(setModalToggle())} />
       <div className="fixed left-1/2 top-1/2 z-50 flex w-[343px] -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-md bg-white p-6">
         <div className="flex justify-between gap-4">
-          <h3 className="heading-large capitalize">{heading}</h3>
+          <h3
+            className={`heading-large ${isDanger ? 'text-red' : 'text-black'}`}
+          >
+            {heading}
+          </h3>
           {showMoreOptions && <MoreOptions optionsAbout="task" />}
         </div>
         {children}
@@ -34,4 +40,5 @@ export default function TemplateModal({
 
 TemplateModal.defaultProps = {
   showMoreOptions: false,
+  isDanger: false,
 };

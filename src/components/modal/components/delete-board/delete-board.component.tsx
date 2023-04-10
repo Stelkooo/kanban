@@ -27,7 +27,7 @@ export default function DeleteBoard({ board }: Props) {
     router.replace('/');
   };
   return (
-    <Modal heading="Delete this board?">
+    <Modal heading="Delete this board?" isDanger>
       <p className="body-large text-medium-grey">
         Are you sure you want to delete the ‘{board.name}’ board? This action
         will remove all columns and tasks and cannot be reversed.

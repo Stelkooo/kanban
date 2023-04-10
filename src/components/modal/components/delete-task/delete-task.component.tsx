@@ -22,7 +22,7 @@ export default function DeleteTask({ task }: Props) {
     dispatch(setModalToggle());
   };
   return (
-    <Modal heading="Delete this task?">
+    <Modal heading="Delete this task?" isDanger>
       <p className="body-large text-medium-grey">
         Are you sure you want to delete the ‘{task.title}’ task and its
         subtasks? This action cannot be reversed.

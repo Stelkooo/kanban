@@ -16,7 +16,7 @@ type Props = {
 export default function Task({ task }: Props) {
   const dispatch = useAppDispatch();
 
-  const onClickHanlder = () => {
+  const onClickHandler = () => {
     dispatch(setTask(task));
     dispatch(setModalType('view-task'));
     dispatch(setModalToggle());
@@ -24,8 +24,8 @@ export default function Task({ task }: Props) {
   return (
     <button
       type="button"
-      className="rounded-lg bg-white px-4 py-6 text-left"
-      onClick={() => onClickHanlder()}
+      className="rounded-lg bg-white px-4 py-6 text-left drop-shadow-md"
+      onClick={() => onClickHandler()}
     >
       <h3 className="heading-medium mb-2">{task.title}</h3>
       <p className="body-medium text-medium-grey">
