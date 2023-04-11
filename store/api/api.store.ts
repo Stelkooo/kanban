@@ -4,7 +4,7 @@ import { TBoard, TColumn, TSubtask, TTask } from '@/types/kanban.types';
 export const boardApi = createApi({
   reducerPath: 'boardApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'api' }),
-  tagTypes: ['Boards'],
+  tagTypes: ['Boards', 'Board'],
   endpoints: (builder) => ({
     getAll: builder.query<TBoard[], void>({
       query: () => 'boards',
@@ -17,7 +17,7 @@ export const boardApi = createApi({
           method: 'GET',
         };
       },
-      providesTags: [{ type: 'Boards', id: 'LIST' }],
+      providesTags: (result) => [{ type: 'Board', id: result?.id }],
     }),
     createBoard: builder.mutation<Partial<TBoard>, Partial<TBoard>>({
       query: (board) => {
@@ -27,9 +27,9 @@ export const boardApi = createApi({
           body: board,
         };
       },
-      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Boards' }],
     }),
-    updateBoard: builder.mutation<TBoard, TBoard>({
+    updateBoard: builder.mutation<void, TBoard>({
       query: (board) => {
         return {
           url: `board?id=${board.id}`,
@@ -37,7 +37,10 @@ export const boardApi = createApi({
           body: board,
         };
       },
-      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Board', id: arg.id },
+        { type: 'Boards' },
+      ],
     }),
     deleteBoard: builder.mutation<void, TBoard>({
       query: (board) => {
@@ -47,7 +50,10 @@ export const boardApi = createApi({
           body: board,
         };
       },
-      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Boards' },
+        { type: 'Board', id: arg.id },
+      ],
     }),
     updateBoardColumns: builder.mutation<
       void,
@@ -70,7 +76,9 @@ export const boardApi = createApi({
           },
         };
       },
-      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Board', id: arg.boardId },
+      ],
     }),
     createTask: builder.mutation<void, Partial<TTask>>({
       query: (task) => {
@@ -80,7 +88,7 @@ export const boardApi = createApi({
           body: task,
         };
       },
-      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Board' }],
     }),
     updateTask: builder.mutation<
       void,
@@ -93,7 +101,7 @@ export const boardApi = createApi({
           body: { task, newColumnId },
         };
       },
-      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Board' }],
     }),
     updateTaskStatus: builder.mutation<
       void,
@@ -106,7 +114,7 @@ export const boardApi = createApi({
           body: { task, newColumnId },
         };
       },
-      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Board' }],
     }),
     deleteTask: builder.mutation<void, TTask>({
       query: (task) => {
@@ -116,7 +124,7 @@ export const boardApi = createApi({
           body: task,
         };
       },
-      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Board' }],
     }),
     updateSubtask: builder.mutation<void, TSubtask>({
       query: (subtask) => {
@@ -126,7 +134,7 @@ export const boardApi = createApi({
           body: subtask,
         };
       },
-      invalidatesTags: [{ type: 'Boards', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Board' }],
     }),
   }),
 });

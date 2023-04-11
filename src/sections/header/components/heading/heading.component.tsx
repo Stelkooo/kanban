@@ -30,11 +30,7 @@ export default function Heading({ name }: Props) {
       {!isTabletSize ? (
         <Button btnStyle="clear" onClickFunc={() => setIsMenuOpen()}>
           {content}
-          <Image
-            src={isMenuOpen ? ChevronUp : ChevronDown}
-            alt=""
-            className=""
-          />
+          <Image src={isMenuOpen ? ChevronUp : ChevronDown} alt="" />
         </Button>
       ) : (
         content

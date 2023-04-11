@@ -29,7 +29,9 @@ export default function EditBoard({ board }: Props) {
     boardApi.useUpdateBoardColumnsMutation();
 
   const onClickHandler = () => {
-    if (name !== board.name) updateBoard({ ...board, name });
+    if (name !== board.name) {
+      updateBoard({ ...board, name });
+    }
     if (
       columns !== board.columns &&
       columns.every((item) => item.name !== '')

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { BeatLoader } from 'react-spinners';
 
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
@@ -23,7 +24,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={`${plusJakartaSans.className} grid place-content-center`}>
-        {isLoading && <h1>Loading</h1>}
+        {isLoading && (
+          <div className="flex h-screen items-center justify-center">
+            <BeatLoader size={32} color="white" aria-label="Loading Spinner" />
+          </div>
+        )}
       </div>
     </>
   );

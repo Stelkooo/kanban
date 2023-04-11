@@ -1,3 +1,5 @@
+'use client';
+
 import { TBoard } from '@/types/kanban.types';
 
 import MoreOptions from '@/src/components/more-options/more-options.component';

@@ -73,7 +73,7 @@ export default async function handler(
         {
           id: task.id,
           title: task.title,
-          description: task.description,
+          description: task.description === null ? '' : task.description,
           columnId: task.column.id,
         }
       );
@@ -105,7 +105,7 @@ export default async function handler(
         `,
         {
           title: task.title,
-          description: task.description,
+          description: task.description === null ? '' : task.description,
           columnId: task.column?.id,
         }
       );
