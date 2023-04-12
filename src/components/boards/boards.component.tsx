@@ -9,7 +9,7 @@ import { boardApi } from '@/store/api/api.store';
 import BoardButton from '../board-button/board-button.component';
 
 type Props = {
-  boards: TBoard[];
+  boards: Array<Partial<TBoard>>;
   setIsMenuOpen?: () => void;
 };
 
@@ -31,24 +31,23 @@ export default function Boards({ boards, setIsMenuOpen }: Props) {
   };
   return (
     <div className="mr-6 flex flex-col md:mr-0">
-      {boards.map((board) =>
-        board.id === currentBoard.data?.id ? (
+      {boards.map((board) => {
+        const { name, id } = board;
+        if (id === currentBoard.data?.id && name) {
+          return (
+            <BoardButton text={name} btnStyle="selected" svg="board" key={id} />
+          );
+        }
+        if (id && name)
           <BoardButton
-            text={board.name}
-            btnStyle="selected"
-            svg="board"
-            key={board.id}
-          />
-        ) : (
-          <BoardButton
-            text={board.name}
+            text={name}
             btnStyle="default"
             svg="board"
-            onClickFunc={() => onClickHandler(board.id)}
-            key={board.id}
-          />
-        )
-      )}
+            onClickFunc={() => onClickHandler(id)}
+            key={id}
+          />;
+        return <p key="No Board Found">No Board Found</p>;
+      })}
       <BoardButton
         btnStyle="create"
         text="Create New Board"

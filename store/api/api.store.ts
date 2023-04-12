@@ -6,7 +6,7 @@ export const boardApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'api' }),
   tagTypes: ['Boards', 'Board'],
   endpoints: (builder) => ({
-    getAll: builder.query<TBoard[], void>({
+    getAll: builder.query<Array<Partial<TBoard>>, void>({
       query: () => 'boards',
       providesTags: [{ type: 'Boards', id: 'LIST' }],
     }),

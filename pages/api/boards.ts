@@ -18,37 +18,9 @@ export default async function handler(
         boards {
           id
           name
-          columns {
-            board {
-              id
-            }
-            id
-            name
-            order
-            tasks {
-              column {
-                id
-              }
-              description
-              id
-              title
-              subtasks {
-                id
-                isCompleted
-                title
-                task {
-                  id
-                  column {
-                    id
-                  }
-                }
-              }
-            }
-          }
         }
       }
     `
   );
-
   res.status(200).json(data.boards);
 }
