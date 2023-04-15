@@ -15,6 +15,7 @@ export default function AddEditSubtasks({ list, setList }: Props) {
   const addHandler = () => {
     setList([...list, { title: '' }]);
   };
+
   const onChangeHandler = (itemIndex: number, e: HTMLInputElement) => {
     setList(
       list.map((item, index) =>
@@ -22,10 +23,13 @@ export default function AddEditSubtasks({ list, setList }: Props) {
       )
     );
   };
+
   const removeHandler = (itemIndex: number) => {
-    if (list.length > 1)
+    if (list.length > 1) {
       setList(list.filter((item, index) => index !== itemIndex));
+    }
   };
+
   return (
     <div>
       <p className="body-medium mb-2 capitalize text-medium-grey">Subtasks</p>
@@ -37,7 +41,7 @@ export default function AddEditSubtasks({ list, setList }: Props) {
               type="text"
               className="body-large mr-4 w-full rounded-[4px] border border-lines-light px-4 py-2 dark:border-lines-dark dark:bg-dark-grey dark:text-white"
               placeholder="e.g. Done"
-              defaultValue={item.title}
+              value={item.title}
               onChange={(e) => onChangeHandler(index, e.currentTarget)}
             />
             <Button btnStyle="clear" onClickFunc={() => removeHandler(index)}>

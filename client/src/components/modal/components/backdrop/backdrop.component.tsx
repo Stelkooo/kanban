@@ -4,17 +4,17 @@ import { useEffect, useRef } from 'react';
 
 type Props = {
   marginTop?: string;
-  onClickFunc: () => void;
+  onClickFunc?: () => void;
 };
 
 export default function BackDrop({ marginTop, onClickFunc }: Props) {
   const backdrop = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = backdrop.current;
-    el?.addEventListener('click', onClickFunc);
+    if (onClickFunc) el?.addEventListener('click', onClickFunc);
 
     return () => {
-      el?.removeEventListener('click', onClickFunc);
+      if (onClickFunc) el?.removeEventListener('click', onClickFunc);
     };
   }, [onClickFunc]);
   return (
@@ -27,4 +27,5 @@ export default function BackDrop({ marginTop, onClickFunc }: Props) {
 
 BackDrop.defaultProps = {
   marginTop: '',
+  onClickFunc: undefined,
 };

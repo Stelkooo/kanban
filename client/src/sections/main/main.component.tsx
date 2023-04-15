@@ -1,26 +1,24 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import _ from 'lodash';
+
+import { TBoard } from '@/types/kanban.types';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setModalType, setModalToggle } from '@/store/modal/modal.reducer';
 import { selectIsModalOpen } from '@/store/modal/modal.selector';
 import selectIsSidebarOpen from '@/store/sidebar/sidebar.selector';
 
-import _ from 'lodash';
-
-import { boardApi } from '@/store/api/api.store';
-
 import Button from '@/src/components/button/button.component';
 import Modal from '@/src/components/modal/modal.component';
 import Columns from './components/columns/columns.component';
 
-export default function Main() {
-  const router = useRouter();
+type Props = {
+  board: TBoard;
+};
+
+export default function Main({ board }: Props) {
   const dispatch = useAppDispatch();
-  const { data } = boardApi.endpoints.getBoard.useQueryState(
-    router.query.board as string
-  );
 
   const isModalOpen = useAppSelector(selectIsModalOpen);
   const isSidebarOpen = useAppSelector(selectIsSidebarOpen);
@@ -35,7 +33,7 @@ export default function Main() {
         isSidebarOpen ? 'md:col-span-1' : 'md:col-span-2'
       }`}
     >
-      {_.isEmpty(data?.columns) ? (
+      {_.isEmpty(board?.columns) ? (
         <div className="absolute top-1/2 -translate-y-1/2 px-4 text-center">
           <h2 className="heading-large mb-6 text-medium-grey">
             This board is empty. Create a new column to get started.
@@ -45,7 +43,7 @@ export default function Main() {
           </Button>
         </div>
       ) : (
-        data && <Columns columns={data.columns} />
+        board.columns && <Columns columns={board.columns} />
       )}
       {isModalOpen && <Modal />}
     </main>

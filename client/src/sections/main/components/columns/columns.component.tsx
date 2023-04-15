@@ -1,6 +1,7 @@
 'use client';
 
 import { TColumn } from '@/types/kanban.types';
+
 import Column from '../column/column.component';
 import AddNewColumn from '../../add-new-column/add-new-column.component';
 
@@ -12,7 +13,7 @@ export default function Columns({ columns }: Props) {
   return (
     <>
       {columns.map((column) => (
-        <Column key={column.id} column={column} />
+        <Column key={column._id} column={column} />
       ))}
       <AddNewColumn />
     </>

@@ -23,18 +23,20 @@ export default function AddTask({ board }: Props) {
 
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [subtasks, setSubtasks] = useState<Array<Partial<TSubtask>>>([
+  const [subtasks, setSubtasks] = useState<TSubtask[]>([
     { title: '' },
     { title: '' },
   ]);
-  const [status, setStatus] = useState<string>(board.columns[0].id as string);
+  const [status, setStatus] = useState<string>(
+    board.columns ? (board.columns[0]._id as string) : ''
+  );
 
   const [createTask, { isLoading }] = boardApi.useCreateTaskMutation();
 
   const onClickHandler = async () => {
     if (title && subtasks.every((subtask) => subtask.title) && status)
       await createTask({
-        column: { id: status },
+        column: { _id: status },
         description,
         title,
         subtasks,
@@ -68,7 +70,7 @@ export default function AddTask({ board }: Props) {
         />
       </label>
       <AddEditSubtasks list={subtasks} setList={setSubtasks} />
-      <Status status={status} setStatus={setStatus} />
+      <Status status={status} func={setStatus} />
       <Button
         btnStyle="primarySmall"
         onClickFunc={() => onClickHandler()}

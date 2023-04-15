@@ -1,62 +1,50 @@
 'use client';
 
-import { useState } from 'react';
-
-import { useAppDispatch } from '@/store/hooks';
-import { setModalToggle } from '@/store/modal/modal.reducer';
+import { TSubtask } from '@/types/kanban.types';
 
 import { boardApi } from '@/store/api/api.store';
 
-import { TTask } from '@/types/kanban.types';
-
-import Button from '@/src/components/button/button.component';
 import Modal from '../template-modal/template-modal.component';
 import Subtasks from './subtasks/subtasks.component';
 import Status from '../status/status.component';
+import SkeletonModal from '../skeleton-modal/skeleton-modal.component';
 
 type Props = {
-  task: TTask;
+  taskId: string;
 };
 
-export default function ViewTask({ task }: Props) {
-  const dispatch = useAppDispatch();
+export default function ViewTask({ taskId }: Props) {
+  const { data: task, isSuccess } = boardApi.useGetTaskQuery(taskId);
 
-  const [status, setStatus] = useState<string>(task.column.id);
+  const [updateTask] = boardApi.useUpdateTaskMutation();
 
-  const [updateTaskStatus] = boardApi.useUpdateTaskStatusMutation();
-
-  const updateStatusHandler = async () => {
-    if (status !== task.column.id) {
-      try {
-        await updateTaskStatus({ task, newColumnId: status });
-        dispatch(setModalToggle());
-      } catch {
-        // do error
-      }
-    }
+  const setStatus = (value: string) => {
+    updateTask({ ...task, column: { _id: value } });
   };
 
-  let content = (
-    <>
-      <Subtasks subtasks={task.subtasks} />
-      <Status status={status} setStatus={setStatus} />
-      <Button btnStyle="primarySmall" onClickFunc={() => updateStatusHandler()}>
-        <p className="body-medium">Save Changes</p>
-      </Button>
-    </>
-  );
+  let content;
 
-  if (task.description) {
+  if (isSuccess && task.column) {
     content = (
       <>
-        <p className="body-large text-medium-grey">{task.description}</p>
-        {content}
+        <Subtasks subtasks={task.subtasks as TSubtask[]} />
+        <Status status={task.column._id as string} func={setStatus} />
       </>
     );
+    if (task.description) {
+      content = (
+        <>
+          <p className="body-large text-medium-grey">{task.description}</p>
+          {content}
+        </>
+      );
+    }
+    return (
+      <Modal heading={task.title as string} showMoreOptions>
+        {content}
+      </Modal>
+    );
   }
-  return (
-    <Modal heading={task.title} showMoreOptions>
-      {content}
-    </Modal>
-  );
+
+  return <SkeletonModal />;
 }

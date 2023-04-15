@@ -5,7 +5,6 @@ import { setModalToggle, setModalType } from '@/store/modal/modal.reducer';
 
 import { TBoard } from '@/types/kanban.types';
 
-import { boardApi } from '@/store/api/api.store';
 import BoardButton from '../board-button/board-button.component';
 
 type Props = {
@@ -17,9 +16,8 @@ export default function Boards({ boards, setIsMenuOpen }: Props) {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const currentBoard = boardApi.endpoints.getBoard.useQueryState(
-    router.query.board as string
-  );
+  const currentBoardId = router.query.board as string;
+
   const onClickHandler = (id: string) => {
     if (setIsMenuOpen !== undefined && setIsMenuOpen !== null) setIsMenuOpen();
     router.push(id);
@@ -32,20 +30,28 @@ export default function Boards({ boards, setIsMenuOpen }: Props) {
   return (
     <div className="mr-6 flex flex-col md:mr-0">
       {boards.map((board) => {
-        const { name, id } = board;
-        if (id === currentBoard.data?.id && name) {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { name, _id } = board;
+        if (_id === currentBoardId && name) {
           return (
-            <BoardButton text={name} btnStyle="selected" svg="board" key={id} />
+            <BoardButton
+              text={name}
+              btnStyle="selected"
+              svg="board"
+              key={_id}
+            />
           );
         }
-        if (id && name)
-          <BoardButton
-            text={name}
-            btnStyle="default"
-            svg="board"
-            onClickFunc={() => onClickHandler(id)}
-            key={id}
-          />;
+        if (_id !== currentBoardId && name && _id)
+          return (
+            <BoardButton
+              text={name}
+              btnStyle="default"
+              svg="board"
+              onClickFunc={() => onClickHandler(_id)}
+              key={_id}
+            />
+          );
         return <p key="No Board Found">No Board Found</p>;
       })}
       <BoardButton

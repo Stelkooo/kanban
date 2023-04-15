@@ -47,7 +47,7 @@ export default function AddEditList({
               type="text"
               className="body-large mr-4 w-full rounded-[4px] border border-lines-light px-4 py-2 dark:border-lines-dark dark:bg-dark-grey dark:text-white"
               placeholder="e.g. Done"
-              defaultValue={item.name}
+              value={item.name}
               onChange={(e) => onChangeHandler(index, e.currentTarget)}
             />
             <Button btnStyle="clear" onClickFunc={() => removeHandler(index)}>

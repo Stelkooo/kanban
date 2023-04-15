@@ -1,9 +1,10 @@
 'use client';
 
+import { ChangeEvent } from 'react';
+
 import { boardApi } from '@/store/api/api.store';
 
 import { TSubtask } from '@/types/kanban.types';
-import { ChangeEvent } from 'react';
 
 type Props = {
   subtask: TSubtask;
@@ -17,13 +18,13 @@ export default function SubTask({ subtask }: Props) {
   };
   return (
     <label
-      htmlFor={subtask.id}
+      htmlFor={subtask._id}
       className="flex cursor-pointer items-center gap-4 rounded-[4px] bg-light-grey p-3 dark:bg-very-dark-grey"
     >
       <input
         type="checkbox"
         defaultChecked={subtask.isCompleted}
-        id={subtask.id}
+        id={subtask._id}
         className="peer sr-only"
         onChange={(e) => onClickHandler(e)}
       />

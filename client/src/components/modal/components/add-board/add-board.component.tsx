@@ -23,32 +23,36 @@ export default function AddBoard() {
     { name: 'Doing' },
   ]);
 
-  const [createBoard, { isLoading: isBoardLoading }] =
+  const [createBoard, { isLoading: isCreateBoardLoading }] =
     boardApi.useCreateBoardMutation();
-  const [createColumns, { isLoading: isColumnsLoading }] =
-    boardApi.useUpdateBoardColumnsMutation();
+  const [createColumn, { isLoading: isCreateColumnLoading }] =
+    boardApi.useCreateColumnMutation();
 
   const onClickHandler = async () => {
-    if (name !== '' && columns.every((item) => item.name !== '')) {
-      try {
-        const boardData = await createBoard({ name, columns }).unwrap();
-        await createColumns({
-          boardId: boardData.id as string,
-          createdColumns: columns,
-          deletedColumns: [],
-          updatedColumns: [],
-        });
-        dispatch(setModalToggle());
-        router.push(`/${boardData.id}`);
-      } catch (error) {
-        // error
+    try {
+      if (name !== '' && columns.every((item) => item.name !== '')) {
+        const board = await createBoard(name).unwrap();
+        columns.forEach(
+          (item) =>
+            board._id &&
+            createColumn({
+              ...item,
+              board: {
+                _id: board._id,
+              },
+            })
+        );
+        router.push(`/${board._id}`);
       }
+    } catch {
+      // error
     }
+    dispatch(setModalToggle());
   };
   return (
     <BoardModal
       addOrEdit="add"
-      isLoading={isBoardLoading || isColumnsLoading}
+      isLoading={isCreateBoardLoading || isCreateColumnLoading}
       listObj={{
         list: columns,
         listType: 'column',

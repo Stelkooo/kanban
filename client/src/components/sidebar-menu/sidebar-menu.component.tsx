@@ -22,7 +22,8 @@ type Props = {
 
 export default function SideBarMenu({ setIsMenuOpen }: Props) {
   const dispatch = useAppDispatch();
-  const { data: boards, isSuccess } = boardApi.useGetAllQuery();
+
+  const { data: boards, isSuccess } = boardApi.useGetBoardsQuery();
 
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === 'system' ? systemTheme : theme;

@@ -6,22 +6,15 @@ import { useState } from 'react';
 import VertEllipsis from '@/public/assets/icon-vertical-ellipsis.svg';
 
 import { useAppDispatch } from '@/store/hooks';
-import {
-  setBoard,
-  setModalToggle,
-  setModalType,
-} from '@/store/modal/modal.reducer';
-
-import { TBoard } from '@/types/kanban.types';
+import { setModalToggle, setModalType } from '@/store/modal/modal.reducer';
 
 import Button from '@/src/components/button/button.component';
 
 type Props = {
   optionsAbout: 'task' | 'board';
-  board?: TBoard;
 };
 
-export default function MoreOptions({ optionsAbout, board }: Props) {
+export default function MoreOptions({ optionsAbout }: Props) {
   const dispatch = useAppDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -34,7 +27,6 @@ export default function MoreOptions({ optionsAbout, board }: Props) {
     setIsPopupOpen(!isPopupOpen);
     dispatch(setModalType(`edit-${optionsAbout}`));
     if (optionsAbout === 'board') {
-      if (board) dispatch(setBoard(board));
       dispatch(setModalToggle());
     }
   };
@@ -79,7 +71,3 @@ export default function MoreOptions({ optionsAbout, board }: Props) {
     </div>
   );
 }
-
-MoreOptions.defaultProps = {
-  board: null,
-};

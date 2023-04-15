@@ -11,10 +11,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 export default function Home() {
   const router = useRouter();
 
-  const { data, isLoading, isSuccess } = boardApi.useGetAllQuery();
+  const { data, isLoading, isSuccess } = boardApi.useGetBoardsQuery();
 
   if (isSuccess && data.length > 0) {
-    router.push(`/${data[0].id}`);
+    router.push(`/${data[0]._id}`);
   }
   return (
     <>

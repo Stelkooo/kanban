@@ -1,42 +1,33 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
 
 import Select, { StylesConfig } from 'react-select';
 
 import { boardApi } from '@/store/api/api.store';
-import { Dispatch, SetStateAction } from 'react';
 
 type OptionType = { value: string; label: string };
 type OptionsType = Array<OptionType>;
 
 type Props = {
   status: string;
-  setStatus: Dispatch<SetStateAction<string>>;
+  func: (value: string) => void;
 };
 
-export default function Status({ status, setStatus }: Props) {
+export default function Status({ status, func }: Props) {
   const router = useRouter();
+
+  const [options, setOptions] = useState<OptionsType>([]);
 
   const { systemTheme, theme } = useTheme();
   const currentTheme = theme === 'system' ? systemTheme : theme;
 
-  const { data: board } = boardApi.endpoints.getBoard.useQueryState(
-    router.query.board as string
-  );
-  const options: OptionsType = [];
+  const [getBoard] = boardApi.useLazyGetBoardQuery();
 
-  if (board) {
-    board.columns.forEach((column) =>
-      options.push({
-        value: column.id as string,
-        label: column.name as string,
-      })
-    );
-  }
   const onChangeHandler = (option: OptionType) => {
-    setStatus(option.value);
+    func(option.value);
   };
 
   const statusStyles: StylesConfig = {
@@ -76,6 +67,26 @@ export default function Status({ status, setStatus }: Props) {
       backgroundColor: `${currentTheme === 'dark' ? '#3E3F4E' : '#E4EBFA'}`,
     }),
   };
+
+  useEffect(() => {
+    (async () => {
+      if (router.query.board) {
+        const board = await getBoard(
+          router.query.board as string,
+          true
+        ).unwrap();
+        if (board.columns)
+          setOptions(
+            board.columns.map((column) => {
+              return {
+                value: column._id as string,
+                label: column.name as string,
+              };
+            })
+          );
+      }
+    })();
+  }, [getBoard, router.query.board]);
   return (
     <div>
       <p className="body-medium mb-2 text-medium-grey dark:text-white">
@@ -83,7 +94,7 @@ export default function Status({ status, setStatus }: Props) {
       </p>
       <Select
         options={options}
-        defaultValue={options.find((item) => item.value === status)}
+        value={options.find((item) => item.value === status)}
         isSearchable={false}
         styles={statusStyles}
         onChange={(e) => onChangeHandler(e as OptionType)}

@@ -21,10 +21,16 @@ export default function DeleteBoard({ board }: Props) {
 
   const [deleteBoard, { isLoading }] = boardApi.useDeleteBoardMutation();
 
+  const { data: boards } = boardApi.useGetBoardsQuery();
+
   const onClickHandler = async () => {
-    await deleteBoard(board);
+    try {
+      if (board._id) await deleteBoard(board._id);
+    } catch {
+      // error
+    }
     dispatch(setModalToggle());
-    router.replace('/');
+    if (boards) router.replace(`/${boards[0]._id}`);
   };
   return (
     <Modal heading="Delete this board?" isDanger>

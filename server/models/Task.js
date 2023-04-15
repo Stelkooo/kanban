@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const ObjectId = mongoose.ObjectId;
 
-const TaskSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId;
+
+const taskSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -9,12 +11,8 @@ const TaskSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  column: {
-    type: ObjectId,
-    ref: 'Column',
-    required: true,
-  },
-  subtasks: [{ type: ObjectId, ref: 'Subtask', default: [] }],
+  column: { type: ObjectId, ref: 'Column', required: true },
+  subtasks: [{ type: ObjectId, ref: 'Subtask', required: true }],
 });
 
-module.exports = mongoose.model('Task', TaskSchema);
+module.exports = mongoose.model('Task', taskSchema);

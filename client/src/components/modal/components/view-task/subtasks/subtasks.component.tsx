@@ -19,7 +19,7 @@ export default function Subtasks({ subtasks }: Props) {
       </h4>
       <div className="grid gap-y-2">
         {subtasks.map((subtask) => (
-          <SubTask subtask={subtask} key={subtask.id} />
+          <SubTask subtask={subtask} key={subtask._id} />
         ))}
       </div>
     </div>

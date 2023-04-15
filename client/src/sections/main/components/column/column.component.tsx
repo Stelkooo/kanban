@@ -11,7 +11,7 @@ type Props = {
 export default function Column({ column }: Props) {
   return (
     <div className="min-w-[280px] max-w-[280px]">
-      {column.tasks && (
+      {column.name && column.tasks && (
         <>
           <h2 className="heading-small mb-6 flex uppercase text-medium-grey before:mr-3 before:inline-block before:h-4 before:w-4 before:rounded-full before:bg-purple">
             {column.name} ({column.tasks.length})

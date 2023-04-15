@@ -1,29 +1,12 @@
-import { useRouter } from 'next/router';
-
 import { useAppDispatch } from '@/store/hooks';
-import {
-  setModalToggle,
-  setModalType,
-  setBoard,
-} from '@/store/modal/modal.reducer';
-
-import { boardApi } from '@/store/api/api.store';
+import { setModalToggle, setModalType } from '@/store/modal/modal.reducer';
 
 export default function AddNewColumn() {
-  const router = useRouter();
-
   const dispatch = useAppDispatch();
 
-  const { data } = boardApi.endpoints.getBoard.useQueryState(
-    router.query.board as string
-  );
-
   const onClickHandler = () => {
-    if (data) {
-      dispatch(setBoard(data));
-      dispatch(setModalType('edit-board'));
-      dispatch(setModalToggle());
-    }
+    dispatch(setModalType('edit-board'));
+    dispatch(setModalToggle());
   };
   return (
     <button

@@ -17,9 +17,11 @@ export default function Task({ task }: Props) {
   const dispatch = useAppDispatch();
 
   const onClickHandler = () => {
-    dispatch(setTask(task));
-    dispatch(setModalType('view-task'));
-    dispatch(setModalToggle());
+    if (task._id) {
+      dispatch(setTask(task._id));
+      dispatch(setModalType('view-task'));
+      dispatch(setModalToggle());
+    }
   };
   return (
     <button
@@ -31,8 +33,11 @@ export default function Task({ task }: Props) {
         {task.title}
       </h3>
       <p className="body-medium text-medium-grey">
-        {task.subtasks.filter((subtask) => subtask.isCompleted === true).length}{' '}
-        of {task.subtasks.length} subtasks
+        {task.subtasks &&
+          `${
+            task.subtasks.filter((subtask) => subtask.isCompleted === true)
+              .length
+          } of ${task.subtasks.length} subtasks`}
       </p>
     </button>
   );

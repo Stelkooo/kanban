@@ -14,7 +14,7 @@ type TInitialState = {
   isModalOpen: boolean;
   modalType: TModalType;
   board: TBoard | null;
-  task: TTask | null;
+  task: string | null;
 };
 
 const MODAL_INITIAL_VALUE: TInitialState = {
@@ -37,7 +37,7 @@ export const modalSlice = createSlice({
     setBoard: (state, action: PayloadAction<TBoard>) => {
       return { ...state, board: action.payload };
     },
-    setTask: (state, action: PayloadAction<TTask>) => {
+    setTask: (state, action: PayloadAction<string>) => {
       return { ...state, task: action.payload };
     },
   },
