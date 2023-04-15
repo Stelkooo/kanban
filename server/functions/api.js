@@ -1,4 +1,5 @@
 const express = require('express');
+const serverless = require('serverless-http');
 var cors = require('cors');
 require('dotenv').config();
 const bodyParser = require('body-parser');
@@ -7,10 +8,10 @@ const { buildSchema } = require('graphql');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 5000;
 
-const Board = require('./models/board');
-const Column = require('./models/column');
-const Task = require('./models/task');
-const Subtask = require('./models/subtask');
+const Board = require('../models/board');
+const Column = require('../models/column');
+const Task = require('../models/task');
+const Subtask = require('../models/subtask');
 
 const app = express();
 
@@ -348,6 +349,9 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log('MongoDB Connected');
-    app.listen(port, console.log(`Server running on PORT: ${port}`));
   })
   .catch((err) => console.error(err));
+
+app.use('/.netlify/functions/api');
+
+module.exports.handler = serverless(app);
