@@ -30,6 +30,7 @@ export default function Button({
     'items-center',
     'justify-center',
     'gap-2',
+    'transition-colors',
   ];
   // add padding
   if (btnStyle !== 'clear') {

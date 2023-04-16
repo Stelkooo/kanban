@@ -26,10 +26,10 @@ export default function Task({ task }: Props) {
   return (
     <button
       type="button"
-      className="group/task rounded-lg bg-white px-4 py-6 text-left drop-shadow-md dark:bg-dark-grey"
+      className="group/task animate-fade-up rounded-lg bg-white px-4 py-6 text-left drop-shadow-md transition-colors dark:bg-dark-grey"
       onClick={() => onClickHandler()}
     >
-      <h3 className="heading-medium mb-2 group-hover/task:text-purple-hover dark:text-white">
+      <h3 className="heading-medium mb-2 transition-colors group-hover/task:text-purple-hover dark:text-white">
         {task.title}
       </h3>
       <p className="body-medium text-medium-grey">

@@ -29,7 +29,7 @@ export default function Sidebar() {
     <div
       className={`${
         isMenuOpen ? 'md:row-span-2 md:w-[260px] md:pb-8' : 'md:row-span-1'
-      } flex w-max flex-col justify-center dark:bg-dark-grey md:justify-start md:gap-[54px] md:border-b md:border-r md:border-lines-light md:pr-5 md:pt-5 dark:md:border-lines-dark`}
+      } flex w-max flex-col justify-center transition-colors dark:bg-dark-grey md:justify-start md:gap-[54px] md:border-b md:border-r md:border-lines-light md:pr-5 md:pt-5 dark:md:border-lines-dark`}
     >
       <div className="pl-4 md:pl-3.5">
         <picture>
@@ -50,7 +50,7 @@ export default function Sidebar() {
       </div>
       <button
         type="button"
-        className={`absolute bottom-8 z-50 hidden rounded-r-full bg-purple p-4.5 ${
+        className={`absolute bottom-8 z-50 hidden rounded-r-full bg-purple p-4.5 transition-colors hover:bg-purple-hover ${
           isMenuOpen ? 'md:hidden' : 'md:block'
         }`}
         onClick={() => dispatch(setSidebarToggle())}

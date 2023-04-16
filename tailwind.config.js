@@ -22,6 +22,20 @@ module.exports = {
         8: 'repeat(8, minmax(0, 1fr))',
         layout: 'min-content 1fr',
       },
+      animation: {
+        'fade-up': 'fade-up .25s ease-in-out',
+        'fade-in': 'fade-in .25s ease-in-out',
+      },
+      keyframes: {
+        'fade-up': {
+          '0%': { opacity: 0, transform: 'translateY(10px)' },
+          '100%': { opacity: 1, transform: 'translateY(0px)' },
+        },
+        'fade-in': {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+      },
     },
     colors: {
       black: '#000112',

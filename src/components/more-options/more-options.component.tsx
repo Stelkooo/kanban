@@ -47,7 +47,7 @@ export default function MoreOptions({ optionsAbout }: Props) {
         />
       </Button>
       {isPopupOpen && (
-        <div className="absolute right-0 top-12 z-50 rounded-lg bg-white p-4 drop-shadow-md dark:bg-dark-grey">
+        <div className="absolute right-0 top-12 z-50 animate-fade-up rounded-lg bg-white p-4 drop-shadow-md dark:bg-dark-grey">
           <button
             type="button"
             className="mb-4 h-6 w-40 text-left"

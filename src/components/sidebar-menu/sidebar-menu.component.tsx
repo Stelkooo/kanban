@@ -40,7 +40,7 @@ export default function SideBarMenu({ setIsMenuOpen }: Props) {
       <>
         <h2 className="heading-small px-6">All Boards ({boards?.length})</h2>
         {boards && <Boards boards={boards} setIsMenuOpen={setIsMenuOpen} />}
-        <div className="md:mt-auto">
+        <div className="md:mt-auto md:flex md:flex-col md:gap-2">
           <div className="mx-4 flex items-center justify-center gap-6 rounded-md bg-light-grey py-3.5 dark:bg-very-dark-grey md:mr-0">
             <Image src={Sun} alt="Light Theme Icon" />
             <label htmlFor="themeSwitcher" className="relative block h-5 w-10">
@@ -48,10 +48,10 @@ export default function SideBarMenu({ setIsMenuOpen }: Props) {
                 type="checkbox"
                 id="themeSwitcher"
                 className="peer/input sr-only"
-                defaultChecked={currentTheme === 'dark'}
+                checked={currentTheme === 'dark'}
                 onChange={() => onChangeHandler()}
               />
-              <div className="absolute inset-0 cursor-pointer rounded-full bg-medium-grey transition-all before:absolute before:left-[3px] before:top-[3px] before:inline-block before:h-[14px] before:w-[14px] before:rounded-full before:bg-white before:transition-all peer-checked/input:bg-purple peer-checked/input:before:left-[23px]" />
+              <div className="absolute inset-0 cursor-pointer rounded-full bg-medium-grey transition-all before:absolute before:left-[3px] before:top-[3px] before:inline-block before:h-[14px] before:w-[14px] before:rounded-full before:bg-white before:transition-all hover:bg-purple-hover peer-checked/input:bg-purple peer-checked/input:before:left-[23px] peer-checked/input:hover:bg-purple-hover" />
             </label>
             <Image src={Moon} alt="Dark Theme Icon" />
           </div>
