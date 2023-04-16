@@ -1,7 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRef } from 'react';
+
+import { useOnClickOutside, useToggle } from 'usehooks-ts';
 
 import VertEllipsis from '@/public/assets/icon-vertical-ellipsis.svg';
 
@@ -15,31 +17,31 @@ type Props = {
 };
 
 export default function MoreOptions({ optionsAbout }: Props) {
+  const menuRef = useRef(null);
+
   const dispatch = useAppDispatch();
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const popupToggleHandler = () => {
-    setIsPopupOpen(!isPopupOpen);
-  };
+  const [isPopupOpen, togglePopup] = useToggle(false);
 
   const editHandler = () => {
-    setIsPopupOpen(!isPopupOpen);
+    togglePopup();
     dispatch(setModalType(`edit-${optionsAbout}`));
     if (optionsAbout === 'board') {
       dispatch(setModalToggle());
     }
   };
   const deleteHandler = () => {
-    setIsPopupOpen(!isPopupOpen);
+    togglePopup();
     dispatch(setModalType(`delete-${optionsAbout}`));
     if (optionsAbout === 'board') {
       dispatch(setModalToggle());
     }
   };
+
+  useOnClickOutside(menuRef, togglePopup);
   return (
     <div className="relative grid place-content-center">
-      <Button btnStyle="clear" onClickFunc={() => popupToggleHandler()}>
+      <Button btnStyle="clear" onClickFunc={() => togglePopup()}>
         <Image
           src={VertEllipsis}
           alt="Click here for more board options"
@@ -47,7 +49,10 @@ export default function MoreOptions({ optionsAbout }: Props) {
         />
       </Button>
       {isPopupOpen && (
-        <div className="absolute right-0 top-12 z-50 animate-fade-up rounded-lg bg-white p-4 drop-shadow-md dark:bg-dark-grey">
+        <div
+          className="absolute right-0 top-12 z-50 animate-fade-up rounded-lg bg-white p-4 drop-shadow-md dark:bg-dark-grey"
+          ref={menuRef}
+        >
           <button
             type="button"
             className="mb-4 h-6 w-40 text-left"
