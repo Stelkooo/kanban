@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect } from 'react';
-import { useToggle, useMediaQuery } from 'usehooks-ts';
+import { useEffect, useRef } from 'react';
+import { useToggle, useMediaQuery, useOnClickOutside } from 'usehooks-ts';
 
 import Button from '@/src/components/button/button.component';
 
@@ -15,18 +15,27 @@ type Props = {
 };
 
 export default function Heading({ name }: Props) {
+  const headingRef = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useToggle(false);
   const isTabletSize = useMediaQuery('(min-width: 768px)');
+
   const content = (
     <h1 className="heading-large whitespace-nowrap text-black dark:text-white">
       {name}
     </h1>
   );
+
+  const onClickOutsideHandler = () => {
+    if (isMenuOpen) setIsMenuOpen();
+  };
+
+  useOnClickOutside(headingRef, onClickOutsideHandler);
+
   useEffect(() => {
     if (isTabletSize && isMenuOpen) setIsMenuOpen();
   }, [isTabletSize, setIsMenuOpen, isMenuOpen]);
   return (
-    <>
+    <div ref={headingRef}>
       {!isTabletSize ? (
         <Button btnStyle="clear" onClickFunc={() => setIsMenuOpen()}>
           {content}
@@ -36,6 +45,6 @@ export default function Heading({ name }: Props) {
         content
       )}
       {isMenuOpen && <SwitchBoards setIsMenuOpen={setIsMenuOpen} />}
-    </>
+    </div>
   );
 }
