@@ -19,7 +19,7 @@ const graphqlBaseQuery =
 export const boardApi = createApi({
   reducerPath: 'boardApi',
   baseQuery: graphqlBaseQuery({
-    baseUrl: 'https://kanban-api-iifn.onrender.com/graphql',
+    baseUrl: 'https://kanban-api-production-eaac.up.railway.app/graphql',
   }),
   tagTypes: ['Boards', 'Board', 'Task'],
   endpoints: (builder) => ({
